@@ -1,3 +1,17 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "rules": {
+    "max-lines": ["error", { "code": 160 }], // max length 160
+    "no-unused-vars": "warn", // Warns on unused variables
+    "eqeqeq": "error", // Enforce strict equality (===)
+    "indent": ["error", 2], // Enforce 2-space indentation
+    "semi": ["error", "always"], // Always require semicolons
+    "curly": "error", // Require curly braces for all control statements
+    "comma-dangle": ["error", "never"], // Disallow trailing commas
+    "arrow-parens": ["error", "always"], // Always require parentheses in arrow functions
+    "no-trailing-spaces": "error", // Disallow trailing spaces at the end of lines
+    "object-curly-spacing": ["error", "always"], // Require spaces inside curly braces
+    "prefer-const": "error", // Prefer const over let when variables are not reassigned
+    "no-var": "error" // Disallow var, prefer let/const
+  }
 }
