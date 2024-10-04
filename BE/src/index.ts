@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { Connect } from './Utills/db';
-import user from './routes/User';
+import { user } from './routes/User';
 
 dotenv.config();
 
