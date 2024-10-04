@@ -1,16 +1,27 @@
-import express, { Express, Request, Response, Application } from 'express';
+import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import { Connect } from './Utills/db';
+import user from './routes/User';
 
-//For env File
 dotenv.config();
 
-const app: Application = express();
-const port = process.env.PORT || 8000;
+const app = express();
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Welcome to Express & TypeScript Server');
-});
+const PORT: String | undefined = process.env.PORT;
 
-app.listen(port, () => {
-  console.log(`Server is Fire at http://localhost:${port}`);
+app.use(bodyParser.json());
+app.use(
+  cors({
+    credentials: true,
+    origin: 'http://localhost:3000',
+  })
+);
+
+app.use('/user', user);
+
+app.listen(PORT, () => {
+  Connect(process.env.MONGODB_CONNECTION_STRING);
+  console.log('listening port', PORT);
 });
