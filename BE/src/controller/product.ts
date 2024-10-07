@@ -2,16 +2,18 @@ import { ProductModel } from 'src/schema/product';
 import { Request, Response } from 'express';
 
 export const createProduct = async (req: Request, res: Response) => {
-  const { name, image, ingeredient, price, discount, categoryId } = req.body;
+  const { name, image, description, price, discount, categoryId, reviewId } =
+    req.body;
 
   try {
     const response = await ProductModel.create({
       name,
       image,
-      ingeredient,
+      description,
       price,
       discount,
       categoryId,
+      reviewId,
     });
     return res.status(200).json(response);
   } catch (error) {
@@ -56,13 +58,13 @@ export const deleteProduct = async (req: Request, res: Response) => {
 export const updateProduct = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const { name, image, ingeredient, price, discount, categoryId } = req.body;
+  const { name, image, description, price, discount, categoryId } = req.body;
 
   try {
     const response = await ProductModel.findByIdAndUpdate(id, {
       name,
       image,
-      ingeredient,
+      description,
       price,
       discount,
       categoryId,
