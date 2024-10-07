@@ -1,34 +1,34 @@
-import { CartModel } from 'src/schema/cart';
 import { Request, Response } from 'express';
+import { WishlistModel } from 'src/schema/wishlist';
 
-export const createCart = async (req: Request, res: Response) => {
+export const createWishlist = async (req: Request, res: Response) => {
   const { productId, userId, _id } = req.body;
 
   try {
-    const cart = await CartModel.findById(_id);
-    if (!cart) {
-      const response = await CartModel.create({
+    const wishlist = await WishlistModel.findById(_id);
+    if (!wishlist) {
+      const response = await WishlistModel.create({
         products: { productId },
         userId,
       });
       return res.status(200).json(response);
     }
 
-    cart.products.push({ productId });
+    wishlist.products.push({ productId });
 
-    await cart.save();
+    await wishlist.save();
 
-    return res.send(cart);
+    return res.send(wishlist);
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);
   }
 };
-export const getCart = async (req: Request, res: Response) => {
+export const getWishlist = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const response = await CartModel.findById(id)
+    const response = await WishlistModel.findById(id)
       .populate({
         path: 'products.productId',
         model: 'product',
@@ -41,9 +41,9 @@ export const getCart = async (req: Request, res: Response) => {
   }
 };
 
-export const getCarts = async (res: Response) => {
+export const getWishlists = async (res: Response) => {
   try {
-    const response = await CartModel.find()
+    const response = await WishlistModel.find()
       .populate({
         path: 'products.productId',
         model: 'product',
@@ -55,22 +55,22 @@ export const getCarts = async (res: Response) => {
     return res.status(500).json(error);
   }
 };
-export const deleteCartItem = async (req: Request, res: Response) => {
+export const deleteWishlistItem = async (req: Request, res: Response) => {
   const { productId, id } = req.body;
 
   try {
-    const cart = await CartModel.findById(id);
-    if (!cart) {
+    const wishlist = await WishlistModel.findById(id);
+    if (!wishlist) {
       return res
         .status(404)
-        .json({ message: 'Cart not found or product not in cart.' });
+        .json({ message: 'Wishlist not found or product not in wishlist.' });
     }
 
-    cart.products.pull({ productId });
+    wishlist.products.pull({ productId });
 
-    await cart.save();
+    await wishlist.save();
 
-    return res.status(200).json(cart);
+    return res.status(200).json(wishlist);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Internal server error', error });
