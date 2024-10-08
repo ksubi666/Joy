@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.666.0",
+    "@aws-sdk/s3-request-presigner": "^3.666.0",
+    "dotenv": "^16.4.5",
     "next": "14.2.13",
     "react": "^18",
     "react-dom": "^18"

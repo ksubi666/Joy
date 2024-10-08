@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { Connect } from './Utills/db';
+import { Connect } from './utills/db';
 import { user } from './routes/User';
 
 dotenv.config();

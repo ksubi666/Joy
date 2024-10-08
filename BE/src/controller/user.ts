@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-export const createUser = async (req: Request, res: Response) => {
+export const createUser = async (req: Request, res: Response): Promise<any> => {
   const { name, email, password, phone, role } = req.body;
 
   try {
@@ -23,7 +23,8 @@ export const createUser = async (req: Request, res: Response) => {
     return res.status(500).json(error);
   }
 };
-export const getUser = async (req: Request, res: Response) => {
+
+export const getUser = async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
 
   try {
@@ -59,7 +60,7 @@ export const UserUpdate = async (req: Request, res: Response) => {
       role,
     });
     const privateKey = process.env.JWT_PRIVATE_KEY;
-    const token = jwt.sign({ ...response }, privateKey);
+    const token = jwt.sign({ ...response }, privateKey as string);
 
     return res.status(200).cookie('token', token).end();
   } catch (error) {
