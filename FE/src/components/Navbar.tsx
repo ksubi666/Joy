@@ -1,5 +1,7 @@
+
 import { CircleUserRound, Heart, Search, ShoppingCart } from 'lucide-react';
 import React from 'react';
+
 
 const styles = {
   container:
@@ -13,7 +15,9 @@ const Navbar = () => {
   return (
     <nav className={styles.container}>
       <div className={styles.subContainer}>
-        <div>logo</div>
+        <img src="/asset/Joy.png" 
+          alt="Logo" 
+          className="h-[50px] w-auto" />
         <div className={styles.searchInput}>
           <Search />
           <input type="text" className="w-full outline-none" />
