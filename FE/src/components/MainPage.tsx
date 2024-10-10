@@ -22,46 +22,28 @@ const MainPage = () => {
   }, []);
 
   return (
-    <div style={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
+    <div className="relative w-full overflow-hidden">
       <div
-        style={{
-          display: 'flex',
-          transition: 'transform 0.5s ease-in-out',
-          transform: `translateX(-${currentSlide * 100}%)`,
-          width: `${slides.length * 100}%`,
-        }}
+        className="flex transition-transform duration-500 ease-in-out"
+        style={{ transform: `translateX(-${currentSlide * 100}%)`, width: `${slides.length * 100}%` }}
       >
         {slides.map((slide) => (
-          <div key={slide.id} style={{ width: '100%', flexShrink: 0, position: 'relative' }}>
+          <div key={slide.id} className="w-full flex-shrink-0 relative">
             <img
               src={slide.image}
-              style={{ width: '1440px', height: '404px' }}
+              className="w-[1440px] h-[404px] object-cover"
+              alt={`Slide ${slide.id}`}
             />
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8))', 
-              zIndex: 1,
-            }} />
-           
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-80 z-1" />
           </div>
         ))}
       </div>
-      <div style={{ position: 'absolute', bottom: '5px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '20px', justifyContent: 'space-between' }}>
+      <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex gap-2 justify-around w-screen">
         {categories.map((category) => (
           <button
             key={category}
             onClick={() => (category)}
-            style={{
-              padding: '10px',
-              color: 'white',
-              fontWeight: 'bold',
-              fontSize: '24px',
-              transition: 'background 0.3s',
-            }}
+            className="px-3 py-2 text-white font-bold text-2xl transition bg-transparent hover:bg-gray-700 rounded"
           >
             {category}
           </button>
@@ -72,3 +54,4 @@ const MainPage = () => {
 };
 
 export default MainPage;
+
