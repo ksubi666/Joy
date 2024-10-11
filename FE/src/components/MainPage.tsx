@@ -34,16 +34,16 @@ const MainPage = () => {
               className="w-[1440px] h-[404px] object-cover"
               alt={`Slide ${slide.id}`}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-80 z-1" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50 z-1" />
           </div>
         ))}
       </div>
-      <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex gap-2 justify-around w-screen">
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex gap-2 justify-around w-screen">
         {categories.map((category) => (
           <button
             key={category}
             onClick={() => (category)}
-            className="px-3 py-2 text-white font-bold text-2xl transition bg-transparent hover:bg-gray-700 rounded"
+            className="min-w-[240px] px-3 py-3 text-white font-bold text-2xl transition bg-transparent hover:bg-white hover:text-black rounded-t-xl"
           >
             {category}
           </button>
