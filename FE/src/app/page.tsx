@@ -1,15 +1,14 @@
-import Card from '@/components/Card';
 import Subcategory from '@/components/Subcategory';
-import Image from 'next/image';
 import React from 'react';
-import MainPage from '../components/MainPage'; 
+import MainPage from '../components/MainPage';
+import Card from '@/components/Card';
 
 export default function Home() {
   return (
     <div>
-       <MainPage />
-        <Subcategory />
+      <MainPage />
+      <Subcategory />
+      <Card />
     </div>
   );
 }
-

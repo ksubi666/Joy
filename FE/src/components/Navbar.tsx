@@ -3,13 +3,11 @@ import React from 'react';
 
 const styles = {
   container:
-    'w-[1440px] h-[70px] bg-white text-black px-[120px] flex justify-between items-center',
+    'max-w-[1440px] h-[70px] bg-white text-black px-[120px] flex justify-between items-center mx-auto',
   searchInput:
     'w-[280px] h-[44px] rounded-3xl border-[#DCDFE4] border-[1px] flex items-center justify-between py-2 px-4 gap-2',
   subContainer: 'flex items-center gap-10',
 };
-
-
 
 const Navbar = () => {
   return (
