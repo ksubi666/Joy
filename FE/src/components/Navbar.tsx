@@ -9,6 +9,8 @@ const styles = {
   subContainer: 'flex items-center gap-10',
 };
 
+
+
 const Navbar = () => {
   return (
     <nav className={styles.container}>
