@@ -2,8 +2,16 @@ import { ProductModel } from 'src/schema/product';
 import { Request, Response } from 'express';
 
 export const createProduct = async (req: Request, res: Response) => {
-  const { name, image, description, price, discount, categoryId, reviewId } =
-    req.body;
+  const {
+    name,
+    image,
+    description,
+    price,
+    discount,
+    categoryId,
+    subCategoryId,
+    reviewId,
+  } = req.body;
 
   try {
     const response = await ProductModel.create({
@@ -13,6 +21,7 @@ export const createProduct = async (req: Request, res: Response) => {
       price,
       discount,
       categoryId,
+      subCategoryId,
       reviewId,
     });
     return res.status(200).json(response);
@@ -24,7 +33,9 @@ export const createProduct = async (req: Request, res: Response) => {
 
 export const getProducts = async (res: Response) => {
   try {
-    const response = await ProductModel.find().populate('categoryId');
+    const response = await ProductModel.find()
+      .populate('categoryId')
+      .populate('subCategoryId');
     return res.status(200).json(response);
   } catch (error) {
     console.log(error);
@@ -58,7 +69,15 @@ export const deleteProduct = async (req: Request, res: Response) => {
 export const updateProduct = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const { name, image, description, price, discount, categoryId } = req.body;
+  const {
+    name,
+    image,
+    description,
+    price,
+    discount,
+    categoryId,
+    subCategoryId,
+  } = req.body;
 
   try {
     const response = await ProductModel.findByIdAndUpdate(id, {
@@ -68,6 +87,7 @@ export const updateProduct = async (req: Request, res: Response) => {
       price,
       discount,
       categoryId,
+      subCategoryId,
     });
     return res.status(200).json(response);
   } catch (error) {
