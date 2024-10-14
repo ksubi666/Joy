@@ -10,18 +10,15 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { Button } from './ui/button';
 import { Plus } from 'lucide-react';
 import { Input } from './ui/input';
 
 const AdminAddSubCategory = () => {
   return (
     <AlertDialog>
-      <AlertDialogTrigger>
-        <Button className="bg-white  hover:bg-white border-[#F79A1F] text-[#F79A1F] rounded-full font-bold">
-          <Plus />
-          Add SubCategory
-        </Button>
+      <AlertDialogTrigger className="bg-white hover:bg-white border-[#F79A1F] text-[#F79A1F] rounded-full font-bold items-center text-[14px] flex pt-2 gap-1 justify-center">
+        <Plus />
+        SubCategory
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
