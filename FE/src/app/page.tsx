@@ -8,7 +8,11 @@ export default function Home() {
     <div>
       <MainPage />
       <Subcategory />
-      <Card />
+      <Card
+        title="Ghost, Ghouls and Gallows Walking Tour with Boat Ride"
+        price="100000"
+        rating="4"
+      />
     </div>
   );
 }
