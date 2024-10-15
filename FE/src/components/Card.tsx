@@ -20,14 +20,14 @@ const Card = ({
     <div
       className={
         pathname == '/admin'
-          ? 'border-[1px] rounded-xl w-[220px] flex flex-col items-center justify-center '
+          ? 'border-[1px] rounded-xl w-[266px] flex flex-col items-center justify-center '
           : 'border-[1px] rounded-xl w-[280px] flex flex-col items-center justify-center '
       }
     >
       <div
         className={
           pathname == '/admin'
-            ? 'w-[220px] h-[220px] relative rounded-t-xl overflow-hidden'
+            ? 'w-[266px] h-[266px] relative rounded-t-xl overflow-hidden'
             : 'w-[280px] h-[280px] relative rounded-t-xl overflow-hidden'
         }
       >

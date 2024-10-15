@@ -1,19 +1,25 @@
-import AdminCategory from '@/components/AdminCategory';
-import AdminSideBar from '@/components/AdminSideBar';
-import ProductEditDialog from '@/components/ProductEditDialog';
-import React from 'react';
+'use client';
+import AdminProducts from '@/components/AdminProducts';
+import AdminSideBard from '@/components/AdminSideBard';
+
+import React, { useState } from 'react';
 
 const page = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const handlerClick = (el: string) => {
+    if (el == 'Products') {
+      setIsOpen(!isOpen);
+    }
+  };
   return (
-    <div className="h-full border-t">
-      <div className="w-[1200px] mx-auto py-10 flex justify-between gap-20">
-        <AdminSideBar />
-        <div className="flex flex-col gap-10 min-w-[1000px]">
-          <AdminCategory />
-          <div className="grid grid-cols-4 gap-4 ">
-            <ProductEditDialog />
-          </div>
-        </div>
+    <div className="h-full max-w-[1200px] mx-auto flex gap-6 ">
+      <AdminSideBard
+        handlerClick={handlerClick}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
+      <div className=" w-full min-h-[850px] border-[1px] rounded-lg mb-10 p-5">
+        {isOpen && <AdminProducts />}
       </div>
     </div>
   );
