@@ -2,7 +2,7 @@
 import { Heart, Star } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
-import { Button } from './ui/button';
+
 import { usePathname } from 'next/navigation';
 
 const Card = ({
@@ -15,6 +15,7 @@ const Card = ({
   rating: string;
 }) => {
   const pathname = usePathname();
+
   return (
     <div
       className={
@@ -54,9 +55,9 @@ const Card = ({
         <h1 className="text-[18px] ">{title}</h1>
         <div className="w-full flex justify-between items-center">
           <h3 className="text-[20px]">{price}</h3>
-          <Button className="bg-white border-[1px] text-black rounded-full hover:bg-white">
+          <div className="bg-white border-[1px] text-black rounded-full hover:bg-white px-4 py-2">
             {pathname == '/admin' ? 'Edit' : 'Add to cart'}
-          </Button>
+          </div>
         </div>
       </div>
     </div>

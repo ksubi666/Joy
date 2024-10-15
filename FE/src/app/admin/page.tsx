@@ -1,6 +1,6 @@
 import AdminCategory from '@/components/AdminCategory';
 import AdminSideBar from '@/components/AdminSideBar';
-import Card from '@/components/Card';
+import ProductEditDialog from '@/components/ProductEditDialog';
 import React from 'react';
 
 const page = () => {
@@ -11,11 +11,7 @@ const page = () => {
         <div className="flex flex-col gap-10 min-w-[1000px]">
           <AdminCategory />
           <div className="grid grid-cols-4 gap-4 ">
-            <Card
-              title="Ghost, Ghouls and Gallows Walking Tour with Boat Ride"
-              price="100000"
-              rating="4"
-            />
+            <ProductEditDialog />
           </div>
         </div>
       </div>

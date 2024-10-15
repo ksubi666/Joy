@@ -28,7 +28,7 @@ const links = [
 
 export const Footer = () => {
   return (
-    <div className="bg-[#F79A1F] relative items-center flex flex-col">
+    <div className="bg-[#EB4F47] relative items-center flex flex-col">
       <div className="z-10">
         <div className="py-[120px] max-w-[1258px] m-auto items-center flex flex-col gap-10">
           <div className="min-w-[1200px] flex justify-between">
