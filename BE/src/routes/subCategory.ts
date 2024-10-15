@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createSubCategory } from 'src/controller/subCategory';
+import { createSubCategory } from '../controller/subCategory';
 const subCategory = Router();
 
 subCategory.post('/create', createSubCategory as any);

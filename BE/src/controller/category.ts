@@ -1,4 +1,4 @@
-import { categoryModel } from 'src/schema/category';
+import { categoryModel } from '../schema/category';
 import { Request, Response } from 'express';
 
 export const createCategory = async (req: Request, res: Response) => {

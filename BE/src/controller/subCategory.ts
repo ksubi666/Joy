@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { subCategoryModel } from 'src/schema/subCategory';
+import { subCategoryModel } from '../schema/subCategory';
 
 export const createSubCategory = async (req: Request, res: Response) => {
   const { name } = req.body;

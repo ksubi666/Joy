@@ -1,4 +1,4 @@
-import { UserModel } from 'src/schema/user';
+import { UserModel } from '../schema/user';
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';

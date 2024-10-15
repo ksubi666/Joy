@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { WishlistModel } from 'src/schema/wishlist';
+import { WishlistModel } from '../schema/wishlist';
 
 export const createWishlist = async (req: Request, res: Response) => {
   const { productId, userId, _id } = req.body;

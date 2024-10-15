@@ -1,4 +1,4 @@
-import { ProductModel } from 'src/schema/product';
+import { ProductModel } from '../schema/product';
 import { Request, Response } from 'express';
 
 export const createProduct = async (req: Request, res: Response) => {

@@ -1,4 +1,4 @@
-import { CartModel } from 'src/schema/cart';
+import { CartModel } from '../schema/cart';
 import { Request, Response } from 'express';
 
 export const createCart = async (req: Request, res: Response) => {
