@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { user } from './routes/User';
-import { subCategory } from './routes/subCategory';
 import { Connect } from './Utills/db';
 
 dotenv.config();
@@ -21,7 +20,6 @@ app.use(
 );
 
 app.use('/user', user);
-app.use('/subCategory', subCategory);
 
 app.listen(PORT, () => {
   Connect(process.env.MONGODB_CONNECTION_STRING);
