@@ -22,6 +22,6 @@ export async function POST(request: Request) {
     });
     return Response.json({ signerUrl });
   } catch (error) {
-    Response.json({ error: 'error' });
+    Response.json({ error: error });
   }
 }

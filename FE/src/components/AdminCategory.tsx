@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from './ui/button';
 import { Plus } from 'lucide-react';
-import AdminAddCategory from '@/components/AdminAddCategory';
+import AdminAddCategory from './AdminAddCategory';
 
 const AdminCategory = () => {
   return (
