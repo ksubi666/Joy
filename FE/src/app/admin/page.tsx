@@ -1,4 +1,5 @@
 'use client';
+import AdminInsight from '@/components/AdminInsight';
 import AdminProducts from '@/components/AdminProducts';
 import AdminSideBard from '@/components/AdminSideBard';
 
@@ -6,6 +7,7 @@ import React, { useState } from 'react';
 
 const page = () => {
   const [isOpen, setIsOpen] = useState(false);
+
   const handlerClick = (el: string) => {
     if (el == 'Products') {
       setIsOpen(!isOpen);
@@ -20,6 +22,7 @@ const page = () => {
       />
       <div className=" w-full min-h-[850px] border-[1px] rounded-lg mb-10">
         {isOpen && <AdminProducts />}
+        <AdminInsight />
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import AdminAddProduct from './AdminAddProduct';
 const AdminProducts = () => {
   return (
     <div>
-      <div className="border-b p-5 flex justify-between">
+      <div className=" px-5 pt-5 flex justify-between">
         <AdminAddCategory />
         <AdminAddProduct />
       </div>
