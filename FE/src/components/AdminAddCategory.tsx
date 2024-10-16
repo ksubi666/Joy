@@ -15,7 +15,7 @@ import { Input } from './ui/input';
 const AdminAddCategory = () => {
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="bg-white text-[#F79A1F] font-bold flex text-[14px] items-center">
+      <AlertDialogTrigger className="bg-white text-[#F79A1F] font-bold flex text-[14px] items-center rounded-lg border-[1px] py-2 px-4 border-[#F79A1F]">
         <Plus />
         Add Category
       </AlertDialogTrigger>
