@@ -1,23 +1,15 @@
+'use client';
 import Image from 'next/image';
 import React from 'react';
 import { Button } from './ui/button';
 import { Heart } from 'lucide-react';
+import Map from '@/components/Map';
 
 const ProductDetail = () => {
   return (
     <div className="grid grid-cols-2 w-[1200px] mx-auto py-10 gap-28">
       <div className="flex flex-col gap-7">
         <div className="relative w-[600px] h-[600px] rounded-lg overflow-hidden">
-          <Image
-            src={
-              'https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt73a14fd074527a97/66f14fad5f331eb7fbd87785/BCS-2024-Dubai-Hot-Air-Balloon-Desktop.jpg?auto=webp&quality=60'
-            }
-            fill
-            alt={''}
-            objectFit="cover"
-          />
-        </div>
-        <div className="relative grid grid-cols-4 w-[600px] h-[250px]">
           <Image
             src={
               'https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt73a14fd074527a97/66f14fad5f331eb7fbd87785/BCS-2024-Dubai-Hot-Air-Balloon-Desktop.jpg?auto=webp&quality=60'
@@ -62,7 +54,9 @@ const ProductDetail = () => {
         </div>
         <div className="flex flex-col gap-3">
           <h3 className="text-[18px] font-semibold">Location</h3>
-          <div className="bg-gray-500 rounded-lg w-full h-[250px]"></div>
+          <div className=" rounded-lg w-full h-[250px] overflow-hidden">
+            <Map center={[47.890664, 106.909683]} />
+          </div>
         </div>
       </div>
     </div>

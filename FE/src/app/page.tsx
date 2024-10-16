@@ -3,7 +3,7 @@
 // import Card from '@/components/Card';
 import ProductDetail from '@/components/ProductDetail';
 import React from 'react';
-import LoginPage from './login/page';
+// import LoginPage from './login/page';
 
 export default function Home() {
   return (
@@ -15,8 +15,8 @@ export default function Home() {
         price="100000"
         rating="4"
       /> */}
-      {/* <ProductDetail /> */}
-      <LoginPage />
+      <ProductDetail />
+      {/* <LoginPage /> */}
     </div>
   );
 }
