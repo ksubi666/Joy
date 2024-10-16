@@ -13,7 +13,7 @@ export const createCategory = async (req: Request, res: Response) => {
   }
 };
 
-export const getCategories = async (res: Response) => {
+export const getCategories = async (_: any, res: Response) => {
   try {
     const response = await categoryModel.find();
     return res.status(200).json(response);
