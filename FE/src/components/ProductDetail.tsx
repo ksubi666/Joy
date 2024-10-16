@@ -1,24 +1,22 @@
 'use client';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { Heart } from 'lucide-react';
 import Map from '@/components/Map';
+import { DetailPageCarousel } from './DetailPageCarousel';
 
 const ProductDetail = () => {
+  const [imageUrl, setImageUrl] = useState(
+    'https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt73a14fd074527a97/66f14fad5f331eb7fbd87785/BCS-2024-Dubai-Hot-Air-Balloon-Desktop.jpg?auto=webp&quality=60'
+  );
   return (
     <div className="grid grid-cols-2 w-[1200px] mx-auto py-10 gap-28">
-      <div className="flex flex-col gap-7">
+      <div className="flex flex-col gap-4 items-center justify-center">
         <div className="relative w-[600px] h-[600px] rounded-lg overflow-hidden">
-          <Image
-            src={
-              'https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt73a14fd074527a97/66f14fad5f331eb7fbd87785/BCS-2024-Dubai-Hot-Air-Balloon-Desktop.jpg?auto=webp&quality=60'
-            }
-            fill
-            alt={''}
-            objectFit="cover"
-          />
+          <Image src={imageUrl} fill alt={''} objectFit="cover" />
         </div>
+        <DetailPageCarousel setImageUrl={setImageUrl} />
       </div>
       <div className="flex flex-col gap-4">
         <Button className="rounded-full h-[24px] px-4 py-2 bg-[#EB4F47] hover:bg-[#EB4F47] font-bold w-fit">
