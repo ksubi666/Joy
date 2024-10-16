@@ -18,7 +18,7 @@ const page = () => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
-      <div className=" w-full min-h-[850px] border-[1px] rounded-lg mb-10 p-5">
+      <div className=" w-full min-h-[850px] border-[1px] rounded-lg mb-10">
         {isOpen && <AdminProducts />}
       </div>
     </div>

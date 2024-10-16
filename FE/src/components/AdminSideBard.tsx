@@ -11,7 +11,6 @@ import {
   SquareUserRound,
 } from 'lucide-react';
 import Image from 'next/image';
-import AdminAddCategory from './AdminAddCategory';
 type SideBarMenu = {
   [key: string]: React.ReactNode;
 };
@@ -73,11 +72,10 @@ const AdminSideBard = ({
               </div>
             </div>
             {isOpen && el == 'Products' && (
-              <div className="flex flex-col gap-3 text-gray-500 pl-20 ">
+              <div className="flex flex-col gap-3 text-gray-500 pl-16 ">
                 <h4 className="font-medium text-[14px] py-2 px-4">
                   category name
                 </h4>
-                <AdminAddCategory />
               </div>
             )}
           </>

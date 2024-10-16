@@ -12,7 +12,7 @@ const ProductDetail = () => {
   );
   return (
     <div className="grid grid-cols-2 w-[1200px] mx-auto py-10 gap-28">
-      <div className="flex flex-col gap-4 items-center justify-center">
+      <div className="flex flex-col gap-4 items-center ">
         <div className="relative w-[600px] h-[600px] rounded-lg overflow-hidden">
           <Image src={imageUrl} fill alt={''} objectFit="cover" />
         </div>

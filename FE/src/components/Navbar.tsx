@@ -1,5 +1,8 @@
 import { CircleUserRound, Heart, Search, ShoppingCart } from 'lucide-react';
+import Image from 'next/image';
 import React from 'react';
+import logo from '../assets/JOY.png';
+import Link from 'next/link';
 
 const styles = {
   container:
@@ -12,8 +15,16 @@ const styles = {
 const Navbar = () => {
   return (
     <nav className={styles.container}>
-      <div className={styles.subContainer}>
-        <div>logo</div>
+      <div className={`${styles.subContainer} gap-5`}>
+        <Link href={'/'} className="w-[50px] h-[50px] relative">
+          <Image
+            src={logo}
+            alt="logo"
+            fill
+            objectFit="cover"
+            objectPosition="center"
+          />
+        </Link>
         <div className={styles.searchInput}>
           <Search />
           <input type="text" className="w-full outline-none" />

@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 import {
   AlertDialog,
@@ -13,18 +12,18 @@ import {
 import { Plus } from 'lucide-react';
 import { Input } from './ui/input';
 
-const AdminAddSubCategory = () => {
+const AdminAddProduct = () => {
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="bg-white hover:bg-white border-[#F79A1F] text-[#F79A1F] rounded-full font-bold items-center text-[14px] flex pt-2 gap-1 justify-center">
+      <AlertDialogTrigger className="bg-white text-[#F79A1F] font-bold flex text-[14px] items-center rounded-lg border-[1px] py-2 px-4 border-[#F79A1F]">
         <Plus />
-        SubCategory
+        Add Product
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Add SubCategory</AlertDialogTitle>
+          <AlertDialogTitle>Add Category</AlertDialogTitle>
         </AlertDialogHeader>
-        <Input className="outline-none " placeholder="SubCategory Name" />
+        <Input className="outline-none " placeholder="Category Name" />
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction className="bg-[#F79A1F] hover:bg-[#F79A1F]">
@@ -36,4 +35,4 @@ const AdminAddSubCategory = () => {
   );
 };
 
-export default AdminAddSubCategory;
+export default AdminAddProduct;
