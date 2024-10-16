@@ -12,13 +12,6 @@ const AdminProducts = () => {
       </div>
       <div className="flex flex-wrap gap-5 p-5">
         <ProductEditDialog />
-        <ProductEditDialog />
-        <ProductEditDialog />
-        <ProductEditDialog />
-        <ProductEditDialog />
-        <ProductEditDialog />
-        <ProductEditDialog />
-        <ProductEditDialog />
       </div>
     </div>
   );

@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import {
   ChartNoAxesCombined,
   ChevronDown,
@@ -11,9 +13,35 @@ import {
   SquareUserRound,
 } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { axiosInstance } from '@/lib/axios';
+
+const styles = {
+  container: 'h-[850px] w-[400px] border-[1px] rounded-lg',
+  avatarContainer: 'flex items-center px-10 gap-3 py-5 border-b',
+  avatarImage: 'size-[80px] rounded-full overflow-hidden relative',
+  avatarSubConatiner: 'flex flex-col items-center',
+  avatarStatusText: 'flex items-center text-[#5fdba7]',
+  avatarName: 'text-[18px] font-semibold',
+  general: 'py-5 px-10 border-b text-[18px] font-semibold',
+  menuContainer:
+    'flex justify-between items-center cursor-pointer px-10 py-4 hover:bg-gray-100 rounded-lg',
+  menuItem: 'flex items-center gap-4',
+  selectedMenuItem: 'flex items-center gap-4 text-[#F79A1F]',
+  categoryListContainer: 'flex flex-col gap-3 text-gray-500 pl-16 ',
+  categoryName: 'font-medium text-[14px] px-4 capitalize',
+};
+
+interface Category {
+  _id: string;
+  name: string;
+}
+
 type SideBarMenu = {
   [key: string]: React.ReactNode;
 };
+
 const sideBarMenu: SideBarMenu = {
   Insight: <ChartNoAxesCombined />,
   Products: <PackageOpen />,
@@ -22,17 +50,30 @@ const sideBarMenu: SideBarMenu = {
   Contacts: <SquareUserRound />,
   Settings: <Settings />,
 };
-const AdminSideBard = ({
-  handlerClick,
-  isOpen,
-}: {
-  handlerClick: string;
-  isOpen: boolean;
-}) => {
+
+const AdminSideBard: React.FC = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const { data } = await axiosInstance.get('/category/getCategories');
+        setCategories(data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    getCategories();
+  }, []);
+
+  const searchParams = useSearchParams();
+  const menu = searchParams.get('menu');
+
   return (
-    <div className="h-[850px] w-[400px] border-[1px] rounded-lg">
-      <div className="flex items-center px-10 gap-3 py-5 border-b">
-        <div className="size-[80px] rounded-full overflow-hidden relative">
+    <div className={styles.container}>
+      <div className={styles.avatarContainer}>
+        <div className={styles.avatarImage}>
           <Image
             src={
               'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611704.jpg'
@@ -41,44 +82,51 @@ const AdminSideBard = ({
             alt="avatar"
           />
         </div>
-        <div className="flex  flex-col items-center">
-          <h3 className="text-[18px] font-semibold">Hello</h3>
-          <div className="flex items-center text-[#5fdba7]">
+        <div className={styles.avatarSubConatiner}>
+          <h3 className={styles.avatarName}>Hello</h3>
+          <span className={styles.avatarStatusText}>
             <Dot strokeWidth={8} size={18} color="#5fdba7" />
             Online
-          </div>
+          </span>
         </div>
       </div>
-      <div className="py-5 px-10 border-b text-[18px] font-semibold">
-        General
-      </div>
+      <div className={styles.general}>General</div>
       <div className="py-5 flex flex-col">
         {Object.keys(sideBarMenu).map((el) => (
-          <>
-            <div
-              key={el}
-              className="flex justify-between items-center cursor-pointer px-10 py-4 hover:bg-gray-100 rounded-lg"
-            >
-              <div className="flex items-center gap-4">
+          <React.Fragment key={el}>
+            <div className={styles.menuContainer}>
+              <div
+                className={
+                  menu === el ? styles.selectedMenuItem : styles.menuItem
+                }
+              >
                 {sideBarMenu[el]}
                 <h3 className="font-medium">{el}</h3>
               </div>
-              <div onClick={() => handlerClick(el)}>
-                {isOpen && el == 'Products' ? (
-                  <ChevronDown size={18} />
+              <Link href={`/admin?menu=${el}`}>
+                {menu === 'Products' && el === 'Products' ? (
+                  <ChevronDown
+                    size={18}
+                    color={menu === el ? '#F79A1F' : 'black'}
+                  />
                 ) : (
-                  <ChevronRight size={18} />
+                  <ChevronRight
+                    size={18}
+                    color={menu === el ? '#F79A1F' : 'black'}
+                  />
                 )}
-              </div>
+              </Link>
             </div>
-            {isOpen && el == 'Products' && (
-              <div className="flex flex-col gap-3 text-gray-500 pl-16 ">
-                <h4 className="font-medium text-[14px] py-2 px-4">
-                  category name
-                </h4>
+            {menu === 'Products' && el === 'Products' && (
+              <div className={styles.categoryListContainer}>
+                {categories.map((category) => (
+                  <h4 key={category._id} className={styles.categoryName}>
+                    {category.name}
+                  </h4>
+                ))}
               </div>
             )}
-          </>
+          </React.Fragment>
         ))}
       </div>
     </div>

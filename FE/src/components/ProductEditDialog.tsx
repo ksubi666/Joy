@@ -26,7 +26,7 @@ const ProductEditDialog = () => {
         <AlertDialogHeader>
           <AlertDialogTitle>Edit product</AlertDialogTitle>
         </AlertDialogHeader>
-        <div>
+        <div className="flex flex-col gap-3">
           <div className={styles.editContainer}>
             <h3>Name</h3>
             <Input />
@@ -49,10 +49,6 @@ const ProductEditDialog = () => {
           </div>
           <div className={styles.editContainer}>
             <h3>Category</h3>
-            <Input placeholder="select bolgono" />
-          </div>
-          <div className={styles.editContainer}>
-            <h3>SubCategory</h3>
             <Input placeholder="select bolgono" />
           </div>
         </div>
