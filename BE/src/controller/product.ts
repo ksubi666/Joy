@@ -11,6 +11,7 @@ export const createProduct = async (req: Request, res: Response) => {
     categoryId,
     subCategoryId,
     reviewId,
+    location,
   } = req.body;
 
   try {
@@ -23,6 +24,7 @@ export const createProduct = async (req: Request, res: Response) => {
       categoryId,
       subCategoryId,
       reviewId,
+      location: location ? [{ lat: location.lat, long: location.long }] : [],
     });
     return res.status(200).json(response);
   } catch (error) {
@@ -77,6 +79,7 @@ export const updateProduct = async (req: Request, res: Response) => {
     discount,
     categoryId,
     subCategoryId,
+    location,
   } = req.body;
 
   try {
@@ -88,6 +91,7 @@ export const updateProduct = async (req: Request, res: Response) => {
       discount,
       categoryId,
       subCategoryId,
+      location: location ? [{ lat: location.lat, long: location.long }] : [],
     });
     return res.status(200).json(response);
   } catch (error) {
