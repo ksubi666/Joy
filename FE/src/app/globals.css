@@ -10,7 +10,7 @@ body {
     text-wrap: balance;
   }
 }
-@import '~leaflet/dist/leaflet.css';
+/* @import '~leaflet/dist/leaflet.css'; */
 
 @layer base {
   :root {
