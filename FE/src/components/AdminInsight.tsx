@@ -6,7 +6,7 @@ import InsightOrderTitles from './InsightOrderTitles';
 
 const AdminInsight = () => {
   return (
-    <div className="w-full h-screen p-5 flex flex-col gap-6">
+    <div className="w-full h-[850px] p-5 flex flex-col gap-5">
       <div className="flex gap-5 h-fit">
         <div className="grid grid-rows-3 min-h-[150px] w-[calc(50%)] gap-5">
           <InsightCard title="Order" count="100" />
@@ -17,7 +17,7 @@ const AdminInsight = () => {
           <InsightChart />
         </div>
       </div>
-      <div className="border-[1px] h-full rounded-lg flex flex-col gap-1 overflow-y-auto">
+      <div className="border-[1px] h-fit rounded-lg flex flex-col gap-1 overflow-y-auto">
         <InsightOrderTitles />
         <InsightOrders />
         <InsightOrders />
