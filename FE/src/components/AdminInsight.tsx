@@ -1,6 +1,8 @@
 import React from 'react';
 import InsightCard from './InsightCard';
 import { InsightChart } from './InsigthChart';
+import InsightOrders from './InsightOrders';
+import InsightOrderTitles from './InsightOrderTitles';
 
 const AdminInsight = () => {
   return (
@@ -15,7 +17,14 @@ const AdminInsight = () => {
           <InsightChart />
         </div>
       </div>
-      <div className="border-[1px] h-full rounded-lg"></div>
+      <div className="border-[1px] rounded-lg flex flex-col gap-1 overflow-y-auto">
+        <InsightOrderTitles />
+        <InsightOrders />
+        <InsightOrders />
+        <InsightOrders />
+        <InsightOrders />
+        <InsightOrders />
+      </div>
     </div>
   );
 };

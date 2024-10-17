@@ -71,6 +71,7 @@ const MainPage = ({ categories }: { categories: Category[] }) => {
           categories.map((category) => (
             <Link
               href={`/?category=${category.name}`}
+              scroll={false}
               key={category._id}
               className={
                 categoryParams == category.name
