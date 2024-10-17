@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import ProductsList from '@/components/ProductsList';
 import { axiosInstance } from '@/lib/axios';
 import { useRouter } from 'next/navigation';
+import Cart from './cart/page';
 
 interface Category {
   _id: number;
@@ -33,9 +34,17 @@ export default function Home() {
 
   return (
     <div>
-      <MainPage categories={categories.slice(0, 5)} />
+      {/* <MainPage categories={categories.slice(0, 5)} />
       <Subcategory categories={categories.slice(5, 30)} />
-      <ProductsList />
+      <ProductsList /> */}
+      <Cart
+        category="Sports"
+        title="O2 Arena Rooftop Climbing Experience"
+        time='4 hoours'
+        rating='5'
+        price='789,000₮'
+        count={303}
+      />
     </div>
   );
 }
