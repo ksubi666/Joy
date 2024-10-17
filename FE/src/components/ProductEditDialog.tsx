@@ -12,15 +12,25 @@ import {
 import Card from './Card';
 import { Input } from './ui/input';
 const styles = { editContainer: 'flex flex-col gap-2 font-medium' };
-const ProductEditDialog = () => {
+const ProductEditDialog = ({
+  title,
+  price,
+  rating,
+  imgUrl,
+  description,
+  discount,
+}: {
+  title: string;
+  price: string;
+  rating: string;
+  imgUrl: string;
+  description: string;
+  discount: string;
+}) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger className="text-start">
-        <Card
-          title="Ghost, Ghouls and Gallows Walking Tour with Boat Ride"
-          price="100000"
-          rating="4"
-        />
+        <Card title={title} price={price} imgUrl={imgUrl} rating={rating} />
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -28,24 +38,24 @@ const ProductEditDialog = () => {
         </AlertDialogHeader>
         <div className="flex flex-col gap-3">
           <div className={styles.editContainer}>
-            <h3>Name</h3>
-            <Input />
+            <h3>Title</h3>
+            <Input placeholder={title} />
           </div>
           <div className={styles.editContainer}>
             <h3>Image</h3>
-            <Input />
+            <Input placeholder={imgUrl} />
           </div>
           <div className={styles.editContainer}>
             <h3>Description</h3>
-            <Input />
+            <Input placeholder={description} />
           </div>
           <div className={styles.editContainer}>
             <h3>Price</h3>
-            <Input />
+            <Input placeholder={price + '₮'} />
           </div>
           <div className={styles.editContainer}>
             <h3>Discount</h3>
-            <Input />
+            <Input placeholder={discount + '%'} />
           </div>
           <div className={styles.editContainer}>
             <h3>Category</h3>
