@@ -5,7 +5,6 @@ import bodyParser from 'body-parser';
 import { user } from './routes/User';
 import { Connect } from './Utills/db';
 import { category } from './routes/Category';
-import { Response, Request } from 'express';
 
 dotenv.config();
 
@@ -23,9 +22,6 @@ app.use(
 
 app.use('/user', user);
 app.use('/category', category);
-app.get('/', (req: Request, res: Response) => {
-  res.send('GET Request Called');
-});
 
 app.listen(PORT, () => {
   Connect(process.env.MONGODB_CONNECTION_STRING);
