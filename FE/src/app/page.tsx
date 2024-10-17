@@ -1,7 +1,7 @@
 'use client';
 import Subcategory from '@/components/Subcategory';
 import MainPage from '../components/MainPage';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProductsList from '@/components/ProductsList';
 import { axiosInstance } from '@/lib/axios';
 import { useRouter } from 'next/navigation';

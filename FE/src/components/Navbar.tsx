@@ -1,6 +1,5 @@
 import { CircleUserRound, Heart, Search, ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
-import React from 'react';
 import logo from '../assets/JOY.png';
 import Link from 'next/link';
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const styles = {
   subcategory:
     'w-full bg-white text-black py-[32px] flex justify-between items-center mx-auto max-w-[1200px]',

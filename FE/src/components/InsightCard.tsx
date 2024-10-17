@@ -1,5 +1,4 @@
 import { MoveUpRight } from 'lucide-react';
-import React from 'react';
 
 const InsightCard = ({ title, count }: { title: string; count: string }) => {
   return (

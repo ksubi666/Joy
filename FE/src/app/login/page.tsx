@@ -3,9 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { EyeIcon, EyeOff } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-
 
 interface FormData {
   email: string;
@@ -29,9 +27,11 @@ export const styles = {
 };
 
 const LoginPage = () => {
-  const router = useRouter();
   const [isHidePassword, setIsHidePassword] = useState<boolean>(true);
-  const [formData, setFormData] = useState<FormData>({ email: '', password: '' });
+  const [formData, setFormData] = useState<FormData>({
+    email: '',
+    password: '',
+  });
 
   const togglePasswordVisibility = () => setIsHidePassword((prev) => !prev);
   const Icon = isHidePassword ? EyeOff : EyeIcon;
@@ -64,20 +64,19 @@ const LoginPage = () => {
           <h3>Нууц үг</h3>
           <div className={styles.input}>
             <Input
-            onChange={handleOnChange}
+              onChange={handleOnChange}
               name="password"
               type={isHidePassword ? 'password' : 'text'}
               placeholder="Нууц үг"
               className={styles.borderOff}
               required
             />
-            <Icon onClick={togglePasswordVisibility} className="cursor-pointer" />
+            <Icon
+              onClick={togglePasswordVisibility}
+              className="cursor-pointer"
+            />
           </div>
-          <p
-            className="text-end cursor-pointer"
-          >
-            Нууц үг сэргээх
-          </p>
+          <p className="text-end cursor-pointer">Нууц үг сэргээх</p>
         </div>
       </div>
       <div className={styles.subContainer}>
@@ -93,10 +92,7 @@ const LoginPage = () => {
           Нэвтрэх
         </Button>
         <p>Эсвэл</p>
-        <Button
-          type="button"
-          className={styles.Button2}
-        >
+        <Button type="button" className={styles.Button2}>
           Бүртгүүлэх
         </Button>
       </div>

@@ -1,4 +1,3 @@
-import React from 'react';
 import ProductEditDialog from './ProductEditDialog';
 import AdminAddCategory from './AdminAddCategory';
 import AdminAddProduct from './AdminAddProduct';
