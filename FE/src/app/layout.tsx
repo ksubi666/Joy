@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import React from 'react';
 import Navbar from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Open_Sans } from 'next/font/google';

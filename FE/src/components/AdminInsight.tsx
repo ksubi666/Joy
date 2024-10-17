@@ -1,8 +1,5 @@
-import React from 'react';
 import InsightCard from './InsightCard';
 import { InsightChart } from './InsigthChart';
-import InsightOrders from './InsightOrders';
-import InsightOrderTitles from './InsightOrderTitles';
 
 const AdminInsight = () => {
   return (
@@ -16,14 +13,6 @@ const AdminInsight = () => {
         <div className="w-full rounded-lg border-[1px]">
           <InsightChart />
         </div>
-      </div>
-      <div className="border-[1px] h-fit rounded-lg flex flex-col gap-1 overflow-y-auto">
-        <InsightOrderTitles />
-        <InsightOrders />
-        <InsightOrders />
-        <InsightOrders />
-        <InsightOrders />
-        <InsightOrders />
       </div>
     </div>
   );

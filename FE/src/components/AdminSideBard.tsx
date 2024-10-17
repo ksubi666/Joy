@@ -44,7 +44,7 @@ type SideBarMenu = {
 
 const sideBarMenu: SideBarMenu = {
   Insight: <ChartNoAxesCombined />,
-  Products: <PackageOpen />,
+  Categories: <PackageOpen />,
   Orders: <NotebookPen />,
   Locations: <MapPin />,
   Contacts: <SquareUserRound />,
@@ -104,7 +104,7 @@ const AdminSideBard: React.FC = () => {
                 <h3 className="font-medium">{el}</h3>
               </div>
               <Link href={`/admin?menu=${el}`}>
-                {menu === 'Products' && el === 'Products' ? (
+                {menu === 'Categories' && el === 'Categories' ? (
                   <ChevronDown
                     size={18}
                     color={menu === el ? '#F79A1F' : 'black'}
@@ -117,7 +117,7 @@ const AdminSideBard: React.FC = () => {
                 )}
               </Link>
             </div>
-            {menu === 'Products' && el === 'Products' && (
+            {menu === 'Categories' && el === 'Categories' && (
               <div className={styles.categoryListContainer}>
                 {categories.map((category) => (
                   <h4 key={category._id} className={styles.categoryName}>

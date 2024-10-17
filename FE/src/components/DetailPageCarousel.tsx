@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { Card, CardContent } from '@/components/ui/card';
 import {
   Carousel,
@@ -7,6 +5,7 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import Image from 'next/image';
+import { Dispatch } from 'react';
 
 const imageUrl = [
   'https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt73a14fd074527a97/66f14fad5f331eb7fbd87785/BCS-2024-Dubai-Hot-Air-Balloon-Desktop.jpg?auto=webp&quality=60',
@@ -14,7 +13,11 @@ const imageUrl = [
   'https://i0.wp.com/picjumbo.com/wp-content/uploads/silhouette-of-a-guy-with-a-cap-at-red-sky-sunset-free-image.jpeg?h=800&quality=80',
   'https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png',
 ];
-export function DetailPageCarousel({ setImageUrl }: { setImageUrl: string }) {
+export const DetailPageCarousel = ({
+  setImageUrl,
+}: {
+  setImageUrl: Dispatch<React.SetStateAction<string>>;
+}) => {
   const handlerClick = (el: string) => {
     setImageUrl(el);
   };
@@ -49,4 +52,4 @@ export function DetailPageCarousel({ setImageUrl }: { setImageUrl: string }) {
       </CarouselContent>
     </Carousel>
   );
-}
+};

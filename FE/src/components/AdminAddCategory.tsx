@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, FormEvent } from 'react';
+import { useRef, FormEvent } from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
