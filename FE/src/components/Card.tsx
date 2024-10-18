@@ -4,9 +4,9 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 const styles = {
   container:
-    'border-[1px] rounded-xl w-[280px] flex flex-col items-center justify-center ',
+    'border-[1px] rounded-xl w-[280px] flex flex-col items-center justify-center hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] hover:-translate-y-1  transition ease-in-out',
   adminContainer:
-    'border-[1px] rounded-xl w-[266px] flex flex-col items-center justify-center ',
+    'border-[1px] rounded-xl w-[266px] flex flex-col items-center justify-center hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] hover:-translate-y-1  transition ease-in-out',
   imgContainer: 'w-[280px] h-[280px] relative rounded-t-xl overflow-hidden',
   adminImgContainer:
     'w-[266px] h-[266px] relative rounded-t-xl overflow-hidden',

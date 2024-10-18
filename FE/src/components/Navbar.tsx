@@ -39,7 +39,9 @@ const Navbar = () => {
         <Link href={'/cart'}>
           <ShoppingCart />
         </Link>
-        <CircleUserRound />
+        <Link href={'/login'}>
+          <CircleUserRound />
+        </Link>
       </div>
     </nav>
   );

@@ -2,6 +2,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { EyeIcon, EyeOff } from 'lucide-react';
+import Link from 'next/link';
 import { useState } from 'react';
 
 interface FormData {
@@ -14,7 +15,7 @@ interface FormData {
 
 export const styles = {
   container:
-    'w-[448px] h-fit rounded-[16px] flex flex-col gap-[48px] p-8 bg-white m-auto pt-[143px] pb-[107px]',
+    'w-[448px] h-fit rounded-[16px] flex flex-col gap-[48px] p-8 bg-white m-auto pb-20',
   header: 'text-[#0D1118] text-center text-[28px] font-bold',
   form: 'flex flex-col items-start gap-4 w-full text-sm',
   inputContainer: 'flex flex-col gap-1 w-full text-sm',
@@ -22,9 +23,9 @@ export const styles = {
   input:
     'w-full flex items-center justify-between border-[#ECEDF0] border-[0.5px] bg-[#F7F7F8] text-[#8B8E95] rounded-[4px] pr-3',
   Button1:
-    'w-[380px] font-normal px-4 py-2 bg-[#F79A1F] text-white disabled:bg-[#EEEFF2] disabled:text-[#1C20243D]',
+    'w-[380px] font-normal px-4 py-2 bg-[#F79A1F] text-white disabled:bg-[#EEEFF2] disabled:text-[#1C20243D] h-12',
   Button2:
-    'w-[380px] bg-white border-[#EB4F47] border-[1px] text-[#272727] font-normal px-4 py-2 hover:bg-[#EB4F47] hover:text-white',
+    'w-[380px] bg-white border-[#EB4F47] border-[1px] text-[#272727] font-normal px-4 py-2 hover:bg-[#EB4F47] hover:text-white flex items-center justify-center rounded-lg h-12',
   borderOff: 'bg-[#F7F7F8] border-0',
 };
 
@@ -137,12 +138,12 @@ const SignupPage = () => {
               : true
           }
         >
-          Нэвтрэх
-        </Button>
-        <p>Эсвэл</p>
-        <Button type="button" className={styles.Button2}>
           Бүртгүүлэх
         </Button>
+        <p>Эсвэл</p>
+        <Link href={'/login'} type="button" className={styles.Button2}>
+          Нэвтрэх
+        </Link>
       </div>
     </form>
   );
