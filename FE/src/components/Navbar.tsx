@@ -33,8 +33,12 @@ const Navbar = () => {
         </div>
       </div>
       <div className={styles.subContainer}>
-        <Heart />
-        <ShoppingCart />
+        <Link href={'/wishlist'}>
+          <Heart />
+        </Link>
+        <Link href={'/cart'}>
+          <ShoppingCart />
+        </Link>
         <CircleUserRound />
       </div>
     </nav>
