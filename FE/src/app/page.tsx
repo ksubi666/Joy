@@ -1,17 +1,12 @@
 'use client';
+
 import Subcategory from '@/components/Subcategory';
 import MainPage from '../components/MainPage';
-import Card from '@/components/Card';
-import ProductDetail from '@/components/ProductDetail';
 import React from 'react';
-import SignupPage from './signup/page';
-import LoginPage from './login/page';
-import Wishlist from './wishlist/page';
 import { useEffect, useState } from 'react';
 import ProductsList from '@/components/ProductsList';
 import { axiosInstance } from '@/lib/axios';
 import { useRouter } from 'next/navigation';
-import Cart from './cart/page';
 
 interface Category {
   _id: number;
@@ -40,24 +35,9 @@ export default function Home() {
 
   return (
     <div>
-      <Wishlist 
-      category="Adventure"
-      title="Ghost, Ghouls and Gallows Walking Tour with Boat Ride"
-      time="2 цаг"
-      rating="5"
-      price="657,800₮"
-      count={999}
-      {/* <MainPage categories={categories.slice(0, 5)} />
+      <MainPage categories={categories.slice(0, 5)} />
       <Subcategory categories={categories.slice(5, 30)} />
-      <ProductsList /> */}
-      <Cart
-        category="Sports"
-        title="O2 Arena Rooftop Climbing Experience"
-        time='4 hoours'
-        rating='5'
-        price='789,000₮'
-        count={303}
-      />
+      <ProductsList />
     </div>
   );
 }
