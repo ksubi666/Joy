@@ -9,7 +9,7 @@ import InsightOrderTitles from '@/components/InsightOrderTitles';
 import InsightOrders from '@/components/InsightOrders';
 
 const styles = {
-  container: 'h-full max-w-[1200px] mx-auto flex gap-6 ',
+  container: 'h-full max-w-[1200px] mx-auto flex gap-6 py-5',
   subContainer: ' w-full min-h-[850px] border-[1px] rounded-lg mb-10',
 };
 
