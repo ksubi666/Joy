@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import React from 'react';
-import { Facebook, Instagram, Twitter } from './Svgs';
+import { Facebook, Instagram, Twitter } from '../icons/Svgs';
 
 const links = [
   {

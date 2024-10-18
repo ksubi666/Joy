@@ -1,29 +1,22 @@
-import React from 'react';
-
-const subcategories = [
-  'Subcategory1',
-  'Subcategory2',
-  'Subcategory3',
-  'Subcategory4',
-  'Subcategory5',
-  'Subcategory6',
-  'Subcategory7',
-];
-
 const styles = {
   subcategory:
     'w-full bg-white text-black py-[32px] flex justify-between items-center mx-auto max-w-[1200px]',
-  button: 'text-2 text-[#EB4F47]  flex items-center py-2 px-4 gap-5',
+  button: 'text-2 text-[#EB4F47]  flex items-center py-2 px-4 gap-5 capitalize',
 };
+interface Category {
+  _id: number;
+  name: string;
+}
 
-const Subcategory = () => {
+const Subcategory = ({ categories }: { categories: Category[] }) => {
   return (
     <div className={styles.subcategory}>
-      {subcategories.map((subcategory) => (
-        <button key={subcategory} className={styles.button}>
-          {subcategory}
-        </button>
-      ))}
+      {categories &&
+        categories.map((subcategory) => (
+          <button key={subcategory._id} className={styles.button}>
+            {subcategory.name}
+          </button>
+        ))}
     </div>
   );
 };

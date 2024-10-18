@@ -1,6 +1,5 @@
 import { CircleUserRound, Heart, Search, ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
-import React from 'react';
 import logo from '../assets/JOY.png';
 import Link from 'next/link';
 
@@ -16,7 +15,10 @@ const Navbar = () => {
   return (
     <nav className={styles.container}>
       <div className={`${styles.subContainer} gap-5`}>
-        <Link href={'/'} className="w-[50px] h-[50px] relative">
+        <Link
+          href={`/?category=art%20Crafts`}
+          className="w-[50px] h-[50px] relative"
+        >
           <Image
             src={logo}
             alt="logo"

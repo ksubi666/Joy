@@ -1,7 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 const slides = [
   {
@@ -25,10 +27,15 @@ const slides = [
       'https://ice-blog.riedellskates.com/wp-content/uploads/2022/10/shutterstock_2200208391-1.jpg',
   },
 ];
+interface Category {
+  _id: number;
+  name: string;
+}
 
-const categories = ['Art & crafts', 'Adventure', 'Sports', 'Gifts', 'Courses'];
+const MainPage = ({ categories }: { categories: Category[] }) => {
+  const searchParams = useSearchParams();
+  const categoryParams = searchParams.get('category');
 
-const MainPage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -60,15 +67,21 @@ const MainPage = () => {
         ))}
       </div>
       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex gap-2 justify-center w-screen mx-auto">
-        {categories.map((category) => (
-          <button
-            key={category}
-            onClick={() => category}
-            className="w-[240px] px-3 py-3 text-white font-bold text-2xl transition bg-transparent hover:bg-white hover:text-black rounded-t-xl"
-          >
-            {category}
-          </button>
-        ))}
+        {categories &&
+          categories.map((category) => (
+            <Link
+              href={`/?category=${category.name}`}
+              scroll={false}
+              key={category._id}
+              className={
+                categoryParams == category.name
+                  ? 'w-[240px] px-3 py-3 font-bold text-2xl transition bg-transparent bg-white text-black rounded-t-xl capitalize flex justify-center items-center'
+                  : 'w-[240px] px-3 py-3 text-white font-bold text-2xl transition bg-transparent hover:bg-white hover:text-black rounded-t-xl capitalize flex justify-center items-center'
+              }
+            >
+              {category.name}
+            </Link>
+          ))}
       </div>
     </div>
   );

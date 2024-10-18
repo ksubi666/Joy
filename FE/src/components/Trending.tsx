@@ -1,16 +1,12 @@
-import React from 'react';
-import Card2 from './Card2';
-
-
+import { Card } from './ui/card';
 
 const Trending = () => {
-    return (
-      <div className='p-20'>
-        <h1 className='font-bold text-xl py-10'>Trending</h1>
-        <Card2/>
+  return (
+    <div className="p-20">
+      <h1 className="font-bold text-xl py-10">Trending</h1>
+      <Card />
+    </div>
+  );
+};
 
-      </div>
-    );
-  };
-  
-  export default Trending;
+export default Trending;

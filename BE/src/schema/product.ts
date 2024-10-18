@@ -19,16 +19,15 @@ const productSchema = new Schema({
     type: Number,
     default: 0,
   },
-  categoryId: {
-    type: Schema.ObjectId,
-    ref: 'category',
-    required: [true, 'Category id required'],
-  },
-  subCategoryId: {
-    type: Schema.ObjectId,
-    ref: 'category',
-    required: [true, 'Category id required'],
-  },
+  categories: [
+    {
+      categoryId: {
+        type: Schema.ObjectId,
+        ref: 'category',
+        required: [true, 'Category id required'],
+      },
+    },
+  ],
   reviewId: {
     type: Schema.ObjectId,
     ref: 'review',
