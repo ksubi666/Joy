@@ -9,17 +9,17 @@ const slides = [
   {
     id: 1,
     image:
-      'https://www.paragliding.mn/wp-content/uploads/2021/08/Hero-slider-1.jpg',
+      'https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt73a14fd074527a97/66f14fad5f331eb7fbd87785/BCS-2024-Dubai-Hot-Air-Balloon-Desktop.jpg?auto=webp&quality=60',
   },
   {
     id: 2,
     image:
-      'https://www.tahititourisme.com/app/uploads/iris-images/17510/tester-laccrobranche-a-myles-mcguinness-1920x1080-f50_50.webp',
+      'https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt943ae4261473ea5f/66e83805aeec9e82787e3aa1/BCS-2024-Paris-Bakery-Homepage-Desktop.jpg',
   },
   {
     id: 3,
     image:
-      'https://hub.suttons.co.uk/wp-content/uploads/2015/08/Copy-of-Copy-of-Untitled-75-800x419.jpg',
+      'https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt8dee98b92fc59b7e/66ad09cbd68a7bc606576448/iStock-1429927208-edited-extended-v2-2500px.jpg',
   },
   {
     id: 4,
