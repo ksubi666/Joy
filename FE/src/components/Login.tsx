@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import image from '../assets/LoginImage.png';
+import axios from 'axios'; 
 
 interface FormData {
   email: string;
@@ -35,6 +36,9 @@ const Login = () => {
     password: '',
   });
 
+  const [error, setError] = useState<string>(''); 
+  const [success, setSuccess] = useState<string>('');
+
   const togglePasswordVisibility = () => setIsHidePassword((prev) => !prev);
   const Icon = isHidePassword ? EyeOff : EyeIcon;
 
@@ -45,12 +49,33 @@ const Login = () => {
     }));
   };
 
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post('/api/auth/login', {
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (response.status === 200) {
+        setSuccess("Амжилттай нэвтэрлээ!"); 
+        setError(''); 
+      }
+    } catch (error) {
+      setError("Имэйл эсвэл нууц үг буруу! Дахин оролдоно уу."); 
+      console.error(error);
+    }
+  };
+
   return (
     <div className="w-[1000px] rounded-3xl shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] h-[700px] grid grid-cols-2 overflow-hidden">
-      <form className={styles.container}>
+      <form className={styles.container} onSubmit={handleSubmit}>
         <div className={styles.header}>
           <h2>Нэвтрэх</h2>
         </div>
+        {error && <p className="text-red-500">{error}</p>}
+        {success && <p className="text-green-500">{success}</p>}
         <div className={styles.form}>
           <div className={styles.inputContainer}>
             <h3>Имэйл </h3>

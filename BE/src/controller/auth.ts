@@ -26,3 +26,25 @@ export const Login = async (req: Request, res: Response): Promise<any> => {
     return res.status(500).json(error);
   }
 };
+
+const saltRounds: number = 10;
+
+export const Signup = async (req: Request, res: Response): Promise<any> => {
+  const { name, email, password, phoneNumber } = req.body;
+
+  try {
+    const salt: string = await bcrypt.genSalt(saltRounds);
+    const hash: string = await bcrypt.hash(password, salt);
+
+    const result = await UserModel.create({
+      email,
+      name,
+      password: hash,
+      phoneNumber,
+    });
+    res.status(200).json(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
