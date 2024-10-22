@@ -22,7 +22,7 @@ export const createProduct = async (req: Request, res: Response) => {
       discount,
       categoryId,
       reviewId,
-      location: location ? [{ lat: location.lat, long: location.long }] : [],
+      location,
     });
     return res.status(200).json(response);
   } catch (error) {

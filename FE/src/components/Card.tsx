@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 const styles = {
   container:
-    'border-[1px] rounded-xl w-[280px] flex flex-col items-center justify-center',
+    'border-[1px] rounded-xl w-[280px] flex flex-col items-center justify-between',
   adminContainer:
     'border-[1px] rounded-xl w-[266px] flex flex-col items-center justify-center ',
   imgContainer: 'w-[280px] h-[280px] relative rounded-t-xl overflow-hidden',
@@ -13,7 +13,8 @@ const styles = {
   overlay: 'w-full h-full absolute bg-custom-gradient opacity-40 z-10',
   heart: 'absolute top-4 right-4 z-20 hover:fill-[#F4F5F6] cursor-pointer',
   rating: 'absolute top-4 left-4 z-20 flex items-center gap-2',
-  titleContainer: 'p-3 flex flex-col gap-2 font-semibold ',
+  titleContainer:
+    'p-3 flex flex-col gap-2 font-semibold w-full min-h-[128px] justify-between',
   button:
     'bg-white border-[1px] text-black rounded-full hover:bg-white px-4 py-2',
   priceContainer: 'w-full flex justify-between items-center',
