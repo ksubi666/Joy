@@ -5,12 +5,13 @@ import bodyParser from 'body-parser';
 import { user } from './routes/User';
 import { Connect } from './Utills/db';
 import { category } from './routes/Category';
+import { auth } from './routes/Auth';
 
 dotenv.config();
 
 const app = express();
 
-const PORT: String | undefined = process.env.PORT;
+const PORT: string | undefined = process.env.PORT;
 
 app.use(bodyParser.json());
 app.use(
@@ -22,6 +23,8 @@ app.use(
 
 app.use('/user', user);
 app.use('/category', category);
+app.use('/auth', auth);
+
 
 app.listen(PORT, () => {
   Connect(process.env.MONGODB_CONNECTION_STRING);
