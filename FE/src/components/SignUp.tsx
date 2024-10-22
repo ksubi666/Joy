@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { EyeIcon, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
-import axios from 'axios';
+import { axiosInstance } from '@/lib/axios';
 
 
 
@@ -66,7 +66,7 @@ export const Signup = () => {
     }
 
     try {
-      const response = await axios.post('/api/auth/signup', {
+      const response = await axiosInstance.post('/auth/signup', {
         name: formData.name,
         email: formData.email,
         password: formData.password,

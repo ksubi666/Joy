@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import image from '../assets/LoginImage.png';
 import axios from 'axios'; 
+import { axiosInstance } from '@/lib/axios';
 
 interface FormData {
   email: string;
@@ -53,7 +54,7 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('/api/auth/login', {
+      const response = await axiosInstance.post('/auth/login', {
         email: formData.email,
         password: formData.password,
       });

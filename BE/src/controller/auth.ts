@@ -8,12 +8,12 @@ export const Login = async (req: Request, res: Response): Promise<any> => {
 
   try {
     const response = await UserModel.findOne({ email });
-
+    console.log(response, 'response')
     if (!response) return res.status(404).send('User not found');
 
-    bcrypt.compare(password, response.password, (err, result) => {
+    bcrypt.compare(password, response.password, (_err, result) => {
       if (result) {
-        const privateKey = process.env.JWT_PRIVATE_KEY;
+        
         const token = jwt.sign({ ...response }, 'password123');
 
         return res.status(200).cookie('token', token).end();
@@ -29,8 +29,11 @@ export const Login = async (req: Request, res: Response): Promise<any> => {
 
 const saltRounds: number = 10;
 
+
+
 export const Signup = async (req: Request, res: Response): Promise<any> => {
   const { name, email, password, phoneNumber } = req.body;
+  console.log(req.body);
 
   try {
     const salt: string = await bcrypt.genSalt(saltRounds);
@@ -40,7 +43,7 @@ export const Signup = async (req: Request, res: Response): Promise<any> => {
       email,
       name,
       password: hash,
-      phoneNumber,
+      phone: phoneNumber,
     });
     res.status(200).json(result);
   } catch (error) {
