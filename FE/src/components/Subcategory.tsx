@@ -1,6 +1,6 @@
 const styles = {
   subcategory:
-    'w-full bg-white text-black py-[32px] flex justify-between items-center mx-auto max-w-[1200px]',
+    'w-full bg-white text-black py-[32px] flex items-center mx-auto max-w-[1200px]',
   button: 'text-2 text-[#EB4F47]  flex items-center py-2 px-4 gap-5 capitalize',
 };
 interface Category {
