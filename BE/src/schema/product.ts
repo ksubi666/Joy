@@ -5,9 +5,11 @@ const productSchema = new Schema({
     type: String,
     required: [true, 'Name is required'],
   },
-  image: {
-    type: String,
-  },
+  image: [
+    {
+      type: String,
+    },
+  ],
   description: {
     type: String,
   },
@@ -19,13 +21,11 @@ const productSchema = new Schema({
     type: Number,
     default: 0,
   },
-  categories: [
+  categoryId: [
     {
-      categoryId: {
-        type: Schema.ObjectId,
-        ref: 'category',
-        required: [true, 'Category id required'],
-      },
+      type: Schema.ObjectId,
+      ref: 'category',
+      required: [true, 'Category id required'],
     },
   ],
   reviewId: {

@@ -7,7 +7,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import image from '../assets/LoginImage.png';
-import axios from 'axios'; 
 import { axiosInstance } from '@/lib/axios';
 
 interface FormData {
@@ -37,7 +36,7 @@ const Login = () => {
     password: '',
   });
 
-  const [error, setError] = useState<string>(''); 
+  const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<string>('');
 
   const togglePasswordVisibility = () => setIsHidePassword((prev) => !prev);
@@ -60,11 +59,11 @@ const Login = () => {
       });
 
       if (response.status === 200) {
-        setSuccess("Амжилттай нэвтэрлээ!"); 
-        setError(''); 
+        setSuccess('Амжилттай нэвтэрлээ!');
+        setError('');
       }
     } catch (error) {
-      setError("Имэйл эсвэл нууц үг буруу! Дахин оролдоно уу."); 
+      setError('Имэйл эсвэл нууц үг буруу! Дахин оролдоно уу.');
       console.error(error);
     }
   };

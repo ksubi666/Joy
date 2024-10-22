@@ -17,10 +17,10 @@ export async function POST(request: Request) {
       Key: fileName,
       ContentType: fileType,
     });
-    const signerUrl = await getSignedUrl(client, command, {
+    const signedUrl = await getSignedUrl(client, command, {
       expiresIn: 60 * 5,
     });
-    return Response.json({ signerUrl });
+    return Response.json({ signedUrl, fileName });
   } catch (error) {
     Response.json({ error: error });
   }

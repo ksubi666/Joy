@@ -9,7 +9,6 @@ export const createProduct = async (req: Request, res: Response) => {
     price,
     discount,
     categoryId,
-    subCategoryId,
     reviewId,
     location,
   } = req.body;
@@ -22,7 +21,6 @@ export const createProduct = async (req: Request, res: Response) => {
       price,
       discount,
       categoryId,
-      subCategoryId,
       reviewId,
       location: location ? [{ lat: location.lat, long: location.long }] : [],
     });
@@ -33,11 +31,9 @@ export const createProduct = async (req: Request, res: Response) => {
   }
 };
 
-export const getProducts = async (res: Response) => {
+export const getProducts = async (_: Request, res: Response) => {
   try {
-    const response = await ProductModel.find()
-      .populate('categoryId')
-      .populate('subCategoryId');
+    const response = await ProductModel.find().populate('categoryId');
     return res.status(200).json(response);
   } catch (error) {
     console.log(error);

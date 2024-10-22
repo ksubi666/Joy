@@ -36,7 +36,7 @@ const AdminAddCategory: React.FC = () => {
     await axiosInstance.post('/category/create', {
       name: categoryName,
     });
-    location.replace(`/admin?menu=Products`);
+    location.replace(`/admin?menu=Categories`);
   };
 
   return (
