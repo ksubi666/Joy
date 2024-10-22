@@ -32,7 +32,7 @@ const productSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'review',
   },
-  location: [{ lat: { type: Number }, long: { type: Number } }],
+  location: [],
 });
 
 export const ProductModel = model('product', productSchema);
