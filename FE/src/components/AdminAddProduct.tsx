@@ -32,8 +32,16 @@ const InputField = ({
   </div>
 );
 
+interface FormElements extends HTMLFormControlsCollection {
+  title: HTMLInputElement;
+  description: HTMLInputElement;
+  price: HTMLInputElement;
+  discount: HTMLInputElement;
+  file: HTMLInputElement;
+}
+
 const AdminAddProduct = () => {
-  const [location, setLocation] = useState<[number, number] | null>(null);
+  const [location, setLocation] = useState(null);
   const [signedUrl, setSignedUrl] = useState<string | null>(null);
   const [imageUrls, setImageUrls] = useState<Array<string>>([]);
   const [category, setCategory] = useState<Array<string> | null>(null);
@@ -59,7 +67,7 @@ const AdminAddProduct = () => {
       console.error('Error fetching upload URL:', error);
     }
   };
-  console.log(location);
+
   const handleUploadImg = async () => {
     if (!signedUrl || !formRef.current) return;
 
@@ -88,18 +96,20 @@ const AdminAddProduct = () => {
   };
 
   const handlerSubmit = async () => {
+    if (!formRef.current) return;
+
+    const formElements = formRef.current.elements as FormElements;
+
     try {
-      if (formRef.current !== null) {
-        await axiosInstance.post('/product/create', {
-          name: formRef.current[2].value,
-          image: imageUrls,
-          description: formRef.current[3].value,
-          price: formRef.current[4].value,
-          discount: formRef.current[5].value,
-          categoryId: category,
-          location: location,
-        });
-      }
+      await axiosInstance.post('/product/create', {
+        name: formElements.title.value,
+        image: imageUrls,
+        description: formElements.description.value,
+        price: formElements.price.value,
+        discount: formElements.discount.value,
+        categoryId: category,
+        location: location,
+      });
       console.log('Product created successfully');
     } catch (error) {
       console.error('Error creating product:', error);
@@ -177,11 +187,7 @@ const AdminAddProduct = () => {
             <div className="flex flex-col gap-2">
               <h3>Location</h3>
               <div className="rounded-lg overflow-hidden h-[200px]">
-                <Map
-                  center={[47.920068, 106.917332]}
-                  setLocation={setLocation}
-                  location={location}
-                />
+                <Map setLocation={setLocation} location={location} />
               </div>
             </div>
           </div>
