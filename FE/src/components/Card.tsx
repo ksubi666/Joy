@@ -20,6 +20,10 @@ const styles = {
   priceContainer: 'w-full flex justify-between items-center',
 };
 
+export const formatPrice = (price: number) => {
+  return `${new Intl.NumberFormat('de-DE').format(price)} ₮`;
+};
+
 const Card = ({
   title,
   price,
@@ -32,7 +36,6 @@ const Card = ({
   imgUrl: string;
 }) => {
   const pathname = usePathname();
-
   return (
     <div
       className={
@@ -59,7 +62,7 @@ const Card = ({
       <div className={styles.titleContainer}>
         <h1 className="text-[18px] ">{title}</h1>
         <div className={styles.priceContainer}>
-          <h3 className="text-[20px]">{price}</h3>
+          <h3 className="text-[20px]">{formatPrice(Number(price))}</h3>
           <div className={styles.button}>
             {pathname == '/admin' ? 'Edit' : 'Add to cart'}
           </div>

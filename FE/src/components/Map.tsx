@@ -8,6 +8,7 @@ import {
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import Image from 'next/image';
+import { SetStateAction, Dispatch } from 'react';
 
 const DefaultIcon = L.icon({
   iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
@@ -20,11 +21,19 @@ const DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
+interface PositionItem {
+  location: [number, number];
+  image: string[];
+  name: string;
+}
+
 interface MapProps {
   center: [number, number];
   location: [number, number];
-  position: object;
+  position: PositionItem[] | null;
+  setLocation: Dispatch<SetStateAction<[number, number]>>;
 }
+
 const Map: React.FC<MapProps> = ({
   center = [47.920068, 106.917332],
   position,
@@ -49,8 +58,8 @@ const Map: React.FC<MapProps> = ({
       />
       {location && <Marker position={location} />}
       {position &&
-        position.map((el) => (
-          <Marker position={el.location}>
+        position.map((el, index) => (
+          <Marker key={index} position={el.location}>
             <Popup>
               <div className="w-[200px] flex flex-col gap-2">
                 <Image

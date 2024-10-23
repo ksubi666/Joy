@@ -45,7 +45,7 @@ const page = () => {
     <div className={styles.container}>
       <AdminSideBard />
       <div className={styles.subContainer}>
-        {menu == 'Categories' && <AdminProducts />}
+        {menu == 'Categories' && <AdminProducts products={products} />}
         {menu == 'Insight' && <AdminInsight />}
         {menu == 'Locations' && (
           <div className="p-5 h-full w-full">
