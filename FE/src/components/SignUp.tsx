@@ -18,18 +18,18 @@ interface FormData {
 
 export const styles = {
   container:
-    'w-[448px] h-fit rounded-[16px] flex flex-col gap-[48px] p-8 bg-white m-auto pb-20',
+    'w-[448px] h-fit  flex flex-col gap-[48px] p-8 bg-white m-auto pb-20 rounded-l-2xl',
   header: 'text-[#0D1118] text-center text-[28px] font-bold',
   form: 'flex flex-col items-start gap-4 w-full text-sm',
   inputContainer: 'flex flex-col gap-1 w-full text-sm',
   subContainer: 'flex flex-col w-full gap-8 items-center text-sm',
   input:
-    'w-full flex items-center justify-between border-[#ECEDF0] border-[0.5px] bg-[#F7F7F8] text-[#8B8E95] rounded-[4px] pr-3',
+    'w-full flex items-center justify-between border-[#ECEDF0] border-[0.5px] bg-orange-200 text-[#8B8E95] rounded-[4px] pr-3',
   Button1:
     'w-[380px] font-normal px-4 py-2 bg-[#F79A1F] text-white disabled:bg-[#EEEFF2] disabled:text-[#1C20243D] h-12',
   Button2:
     'w-[380px] bg-white border-[#EB4F47] border-[1px] text-[#272727] font-normal px-4 py-2 hover:bg-[#EB4F47] hover:text-white flex items-center justify-center rounded-lg h-12',
-  borderOff: 'bg-[#F7F7F8] border-0',
+  borderOff: 'bg-orange-200 border-0',
 };
 
 
@@ -84,7 +84,8 @@ export const Signup = () => {
   };
 
   return (
-    <form className={styles.container} onSubmit={handleSubmit}>
+    <div className='flex items-center w-[896px] drop-shadow-[0_35px_35px_rgba(0,0,0,0.30)] rounded-2xl justify-between mx-auto'>
+      <form className={styles.container} onSubmit={handleSubmit}>
       <div className={styles.header}>
         <h2>Бүртгүүлэх</h2>
       </div>
@@ -181,7 +182,13 @@ export const Signup = () => {
           Нэвтрэх
         </Link>
       </div>
-    </form>
+      </form>
+      
+      <div className='flex w-full h-[870px] bg-white items-center justify-end rounded-r-2xl'>
+        <div className='bg-orange-400 rounded-2xl w-[300px] h-full'></div>
+      </div>
+  
+    </div>
   );
 };
 
