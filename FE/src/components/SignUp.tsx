@@ -92,8 +92,6 @@ export const Signup = () => {
       <div >
         <h2 className={styles.header}>Бүртгүүлэх</h2>
         <h3 className='flex justify-center'>Join us today!</h3>
-      </div>
-      
       {error && <p className="text-red-500">{error}</p>} 
       {success && <p className="text-green-500">{success}</p>} 
       <div className={styles.form}>
