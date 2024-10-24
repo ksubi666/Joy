@@ -14,7 +14,7 @@ const styles = {
   heart: 'absolute top-4 right-4 z-20 hover:fill-[#F4F5F6] cursor-pointer',
   rating: 'absolute top-4 left-4 z-20 flex items-center gap-2',
   titleContainer:
-    'p-3 flex flex-col gap-2 font-semibold w-full min-h-[128px] justify-between',
+    'p-3 flex flex-col gap-2 font-semibold w-full min-h-[150px] justify-between',
   button:
     'bg-white border-[1px] text-black rounded-full hover:bg-white px-4 py-2',
   priceContainer: 'w-full flex justify-between items-center',

@@ -40,7 +40,6 @@ export default function Home() {
       <MainPage categories={categories.slice(0, 5)} />
       <Subcategory categories={categories.slice(5, 30)} />
       <ProductsList />
-      <ReviewRating />
     </div>
   );
 }

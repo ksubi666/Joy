@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import Card from './Card';
 import { axiosInstance } from '@/lib/axios';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import _ from 'lodash';
 
 interface Product {
   name: string;
@@ -13,6 +15,10 @@ interface Product {
 
 const ProductsList = () => {
   const [products, setProducts] = useState<Product[] | null>(null);
+  const [filteredProduct, setFilteredProduct] = useState(products);
+  const searchParams = useSearchParams();
+
+  const category = searchParams.get('category');
 
   useEffect(() => {
     const getProducts = async () => {
@@ -20,13 +26,38 @@ const ProductsList = () => {
         '/product/getProducts'
       );
       setProducts(data);
+      setFilteredProduct(
+        data &&
+          _.filter(
+            data,
+            (product, i) =>
+              (product.categoryId[0] &&
+                product.categoryId[0].name == category) ||
+              (product.categoryId[1] &&
+                product.categoryId[1].name == category) ||
+              (product.categoryId[2] && product.categoryId[2].name == category)
+          )
+      );
     };
     getProducts();
   }, []);
 
+  useEffect(() => {
+    setFilteredProduct(
+      products &&
+        _.filter(
+          products,
+          (product, i) =>
+            (product.categoryId[0] && product.categoryId[0].name == category) ||
+            (product.categoryId[1] && product.categoryId[1].name == category) ||
+            (product.categoryId[2] && product.categoryId[2].name == category)
+        )
+    );
+  }, [category]);
+  console.log(filteredProduct);
   return (
     <div className="flex flex-wrap max-w-[1200px] mx-auto gap-[25px] mb-10">
-      {products?.map((product) => (
+      {filteredProduct?.map((product) => (
         <Link href={`/detailpage?product=${product._id}`}>
           <Card
             key={product.name}

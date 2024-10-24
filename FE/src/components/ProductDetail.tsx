@@ -8,6 +8,7 @@ import { DetailPageCarousel } from './DetailPageCarousel';
 import { useSearchParams } from 'next/navigation';
 import { axiosInstance } from '@/lib/axios';
 import { formatPrice } from './Card';
+import ReviewRating from './Review';
 
 interface Category {
   name: string;
@@ -100,6 +101,7 @@ const ProductDetail: React.FC = () => {
                 <Map center={product.location} position={products} />
               </div>
             </div>
+            <ReviewRating />
           </div>
         </div>
       ))}
