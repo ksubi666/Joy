@@ -18,6 +18,7 @@ import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { Button } from './ui/button';
 import { axiosInstance } from '@/lib/axios';
+import { Textarea } from './ui/textarea';
 
 const InputField = ({
   label,
@@ -25,20 +26,18 @@ const InputField = ({
 }: {
   label: string;
   placeholder: string;
-}) => (
-  <div className="flex flex-col gap-2">
-    <h3>{label}</h3>
-    <Input placeholder={placeholder} />
-  </div>
-);
-
-interface FormElements extends HTMLFormControlsCollection {
-  title: HTMLInputElement;
-  description: HTMLInputElement;
-  price: HTMLInputElement;
-  discount: HTMLInputElement;
-  file: HTMLInputElement;
-}
+}) =>
+  label === 'Description' ? (
+    <div className="flex flex-col gap-2">
+      <h3>{label}</h3>
+      <Textarea placeholder={placeholder} />
+    </div>
+  ) : (
+    <div className="flex flex-col gap-2">
+      <h3>{label}</h3>
+      <Input placeholder={placeholder} />
+    </div>
+  );
 
 const AdminAddProduct = () => {
   const [location, setLocation] = useState(null);
@@ -96,17 +95,13 @@ const AdminAddProduct = () => {
   };
 
   const handlerSubmit = async () => {
-    if (!formRef.current) return;
-
-    const formElements = formRef.current.elements as FormElements;
-
     try {
       await axiosInstance.post('/product/create', {
-        name: formElements.title.value,
+        name: formRef.current[2].value,
         image: imageUrls,
-        description: formElements.description.value,
-        price: formElements.price.value,
-        discount: formElements.discount.value,
+        description: formRef.current[3].value,
+        price: formRef.current[4].value,
+        discount: formRef.current[5].value,
         categoryId: category,
         location: location,
       });

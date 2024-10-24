@@ -1,7 +1,6 @@
 import ProductEditDialog from './ProductEditDialog';
 import AdminAddCategory from './AdminAddCategory';
 import AdminAddProduct from './AdminAddProduct';
-import { description } from './InsigthChart';
 
 const AdminProducts = ({ products }) => {
   return (
@@ -12,14 +11,16 @@ const AdminProducts = ({ products }) => {
       </div>
       <div className="flex flex-wrap gap-5 p-5">
         {products &&
-          products.map((products) => (
+          products.map((product) => (
             <ProductEditDialog
-              title={products.name}
-              price={products.price}
-              imgUrl={`https://pub-085cb38b95fb4b51936e3f399499e3cd.r2.dev/joy/${products.image[0]}`}
+              _id={product._id}
+              title={product.name}
+              price={product.price}
+              imgUrl={`https://pub-085cb38b95fb4b51936e3f399499e3cd.r2.dev/joy/${product.image[0]}`}
               rating="4"
-              description={products.description}
-              discount={products.discount}
+              description={product.description}
+              discount={product.discount}
+              productLocation={product.location}
             />
           ))}
       </div>
