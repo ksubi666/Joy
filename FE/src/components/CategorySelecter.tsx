@@ -15,8 +15,14 @@ interface Category {
   _id: string;
   name: string;
 }
-export function CategorySelecter({ setCategory }: { setCategory: string }) {
+
+export function CategorySelecter({
+  setCategory,
+}: {
+  setCategory: (categories: string[]) => void;
+}) {
   const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -30,16 +36,35 @@ export function CategorySelecter({ setCategory }: { setCategory: string }) {
 
     getCategories();
   }, []);
+
+  const handleSelectChange = (value: string) => {
+    setSelectedCategories((prev) => {
+      if (prev.includes(value)) {
+        return prev.filter((category) => category !== value);
+      } else {
+        return [...prev, value];
+      }
+    });
+  };
+
+  useEffect(() => {
+    setCategory(selectedCategories);
+  }, [selectedCategories, setCategory]);
+
   return (
-    <Select onValueChange={(e) => setCategory(e)}>
+    <Select onValueChange={handleSelectChange}>
       <SelectTrigger className="w-full h-12">
-        <SelectValue placeholder="Select a category" />
+        <SelectValue placeholder="Select categories" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Categories</SelectLabel>
           {categories.map((category) => (
-            <SelectItem value={category._id} className="capitalize">
+            <SelectItem
+              key={category._id}
+              value={category._id}
+              className="capitalize"
+            >
               {category.name}
             </SelectItem>
           ))}

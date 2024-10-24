@@ -67,16 +67,8 @@ export const deleteProduct = async (req: Request, res: Response) => {
 export const updateProduct = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const {
-    name,
-    image,
-    description,
-    price,
-    discount,
-    categoryId,
-    subCategoryId,
-    location,
-  } = req.body;
+  const { name, image, description, price, discount, categoryId, location } =
+    req.body;
 
   try {
     const response = await ProductModel.findByIdAndUpdate(id, {
@@ -86,8 +78,7 @@ export const updateProduct = async (req: Request, res: Response) => {
       price,
       discount,
       categoryId,
-      subCategoryId,
-      location: location ? [{ lat: location.lat, long: location.long }] : [],
+      location,
     });
     return res.status(200).json(response);
   } catch (error) {

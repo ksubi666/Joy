@@ -73,7 +73,7 @@ const Map: React.FC<MapProps> = ({
             </Popup>
           </Marker>
         ))}
-      <MapEvents />
+      {setLocation && <MapEvents />}
     </MapContainer>
   );
 };

@@ -71,9 +71,13 @@ const ProductDetail: React.FC = () => {
             />
           </div>
           <div className="flex flex-col gap-4">
-            <Button className="rounded-full h-[24px] px-4 py-2 bg-[#EB4F47] hover:bg-[#EB4F47] font-bold w-fit capitalize">
-              {product.categoryId[0].name}
-            </Button>
+            <div className="flex flex-wrap gap-2">
+              {product.categoryId.map((category) => (
+                <Button className="rounded-full h-[24px] px-3 py-2 bg-[#EB4F47] hover:bg-[#EB4F47] font-bold w-fit capitalize">
+                  {category.name}
+                </Button>
+              ))}
+            </div>
             <h1 className="text-[32px] font-semibold">{product.name}</h1>
             <div className="flex flex-col gap-3">
               <p className="font-bold text-[28px]">
