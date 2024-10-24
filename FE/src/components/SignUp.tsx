@@ -5,6 +5,9 @@ import { EyeIcon, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { axiosInstance } from '@/lib/axios';
+import Image from 'next/image';
+import Model from '@/assets/model.png';
+
 
 
 
@@ -22,7 +25,7 @@ export const styles = {
   header: 'text-[#0D1118] text-center text-[28px] font-bold',
   form: 'flex flex-col items-start gap-4 w-full text-sm',
   inputContainer: 'flex flex-col gap-1 w-full text-sm',
-  subContainer: 'flex flex-col w-full gap-8 items-center text-sm',
+  subContainer: 'flex flex-col w-full gap-5 items-center text-sm',
   input:
     'w-full flex items-center justify-between border-[#ECEDF0] border-[0.5px] bg-orange-200 text-[#8B8E95] rounded-[4px] pr-3',
   Button1:
@@ -86,9 +89,9 @@ export const Signup = () => {
   return (
     <div className='flex items-center w-[896px] drop-shadow-[0_35px_35px_rgba(0,0,0,0.30)] rounded-2xl justify-between mx-auto'>
       <form className={styles.container} onSubmit={handleSubmit}>
-      <div className={styles.header}>
-        <h2>Бүртгүүлэх</h2>
-      </div>
+      <div >
+        <h2 className={styles.header}>Бүртгүүлэх</h2>
+        <h3 className='flex justify-center'>Join us today!</h3>
       {error && <p className="text-red-500">{error}</p>} 
       {success && <p className="text-green-500">{success}</p>} 
       <div className={styles.form}>
@@ -185,7 +188,12 @@ export const Signup = () => {
       </form>
       
       <div className='flex w-full h-[870px] bg-white items-center justify-end rounded-r-2xl'>
-        <div className='bg-orange-400 rounded-2xl w-[300px] h-full'></div>
+        <Image src={Model}
+        className='absolute'
+        width={500}
+        alt='model'
+        />
+        <div className='bg-orange-300 rounded-2xl w-[300px] h-full'></div>
       </div>
   
     </div>
