@@ -8,9 +8,6 @@ import { axiosInstance } from '@/lib/axios';
 import Image from 'next/image';
 import Model from '@/assets/model.png';
 
-
-
-
 interface FormData {
   email: string;
   password: string;
@@ -35,7 +32,6 @@ export const styles = {
   borderOff: 'bg-orange-200 border-0',
 };
 
-
 export const Signup = () => {
   const [isHidePassword, setIsHidePassword] = useState<boolean>(true);
   const [formData, setFormData] = useState<FormData>({
@@ -46,9 +42,8 @@ export const Signup = () => {
     rePassword: '',
   });
 
-  const [error, setError] = useState<string>(''); 
-  const [success, setSuccess] = useState<string>(''); 
-
+  const [error, setError] = useState<string>('');
+  const [success, setSuccess] = useState<string>('');
 
   const togglePasswordVisibility = () => setIsHidePassword((prev) => !prev);
   const Icon = isHidePassword ? EyeOff : EyeIcon;
@@ -64,7 +59,7 @@ export const Signup = () => {
     event.preventDefault();
 
     if (formData.password !== formData.rePassword) {
-      setError("Passwords do not match");
+      setError('Passwords do not match');
       return;
     }
 
@@ -77,127 +72,119 @@ export const Signup = () => {
       });
 
       if (response.status === 200) {
-        setSuccess("Амжилттай бүртгэгдлээ!");
-        setError(''); 
+        setSuccess('Амжилттай бүртгэгдлээ!');
+        setError('');
       }
     } catch (error) {
-      setError("Алдаа гарлаа! Дахин оролдоно уу.");
+      setError('Алдаа гарлаа! Дахин оролдоно уу.');
       console.error(error);
     }
   };
 
   return (
-    <div className='flex items-center w-[896px] drop-shadow-[0_35px_35px_rgba(0,0,0,0.30)] rounded-2xl justify-between mx-auto'>
+    <div className="flex items-center w-[896px] drop-shadow-[0_35px_35px_rgba(0,0,0,0.30)] rounded-2xl justify-between mx-auto">
       <form className={styles.container} onSubmit={handleSubmit}>
-      <div >
         <h2 className={styles.header}>Бүртгүүлэх</h2>
-        <h3 className='flex justify-center'>Join us today!</h3>
-      {error && <p className="text-red-500">{error}</p>} 
-      {success && <p className="text-green-500">{success}</p>} 
-      <div className={styles.form}>
-        <div className={styles.inputContainer}>
-          <h3>Нэр</h3>
-          <Input
-            onChange={handleOnChange}
-            name="name"
-            type="text"
-            placeholder="Нэрээ оруулна уу"
-            className={styles.input}
-            required
-          />
-        </div>
-        <div className={styles.inputContainer}>
-          <h3>Имэйл </h3>
-          <Input
-            onChange={handleOnChange}
-            name="email"
-            type="email"
-            placeholder="Имэйл хаягаа оруулна уу"
-            className={styles.input}
-            required
-          />
-        </div>
-        <div className={styles.inputContainer}>
-          <h3>Утасны дугаар</h3>
-          <Input
-            onChange={handleOnChange}
-            name="phoneNumber"
-            type="string"
-            placeholder="Та утасны дугаараа оруулна уу"
-            className={styles.input}
-            required
-          />
-        </div>
-        <div className={styles.inputContainer}>
-          <h3>Нууц үг</h3>
-          <div className={styles.input}>
+        <h3 className="flex justify-center">Join us today!</h3>
+        {error && <p className="text-red-500">{error}</p>}
+        {success && <p className="text-green-500">{success}</p>}
+        <div className={styles.form}>
+          <div className={styles.inputContainer}>
+            <h3>Нэр</h3>
             <Input
               onChange={handleOnChange}
-              name="password"
-              type={isHidePassword ? 'password' : 'text'}
-              placeholder="Нууц үг"
-              className={styles.borderOff}
+              name="name"
+              type="text"
+              placeholder="Нэрээ оруулна уу"
+              className={styles.input}
               required
-            />
-            <Icon
-              onClick={togglePasswordVisibility}
-              className="cursor-pointer"
             />
           </div>
           <div className={styles.inputContainer}>
-            <h3>Нууц үг давтах</h3>
+            <h3>Имэйл </h3>
+            <Input
+              onChange={handleOnChange}
+              name="email"
+              type="email"
+              placeholder="Имэйл хаягаа оруулна уу"
+              className={styles.input}
+              required
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <h3>Утасны дугаар</h3>
+            <Input
+              onChange={handleOnChange}
+              name="phoneNumber"
+              type="string"
+              placeholder="Та утасны дугаараа оруулна уу"
+              className={styles.input}
+              required
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <h3>Нууц үг</h3>
             <div className={styles.input}>
               <Input
                 onChange={handleOnChange}
-                name="rePassword"
+                name="password"
                 type={isHidePassword ? 'password' : 'text'}
-                placeholder="Нууц үгээ оруулна уу"
+                placeholder="Нууц үг"
                 className={styles.borderOff}
                 required
-              ></Input>
+              />
               <Icon
                 onClick={togglePasswordVisibility}
                 className="cursor-pointer"
               />
             </div>
+            <div className={styles.inputContainer}>
+              <h3>Нууц үг давтах</h3>
+              <div className={styles.input}>
+                <Input
+                  onChange={handleOnChange}
+                  name="rePassword"
+                  type={isHidePassword ? 'password' : 'text'}
+                  placeholder="Нууц үгээ оруулна уу"
+                  className={styles.borderOff}
+                  required
+                ></Input>
+                <Icon
+                  onClick={togglePasswordVisibility}
+                  className="cursor-pointer"
+                />
+              </div>
+            </div>
+            <p className="text-end cursor-pointer">Нууц үг сэргээх</p>
           </div>
-          <p className="text-end cursor-pointer">Нууц үг сэргээх</p>
         </div>
-      </div>
-      <div className={styles.subContainer}>
-        <Button
-          type="submit"
-          className={styles.Button1}
-          disabled={
-            formData.email.length > 0 &&
-            formData.password.length > 0 &&
-            formData.name.length > 0 &&
-            formData.phoneNumber.length > 0 &&
-            formData.rePassword.length > 0
-              ? false
-              : true
-          }
-        >
-          Бүртгүүлэх
-        </Button>
-        <p>Эсвэл</p>
-        <Link href={'/login'} type="button" className={styles.Button2}>
-          Нэвтрэх
-        </Link>
-      </div>
+        <div className={styles.subContainer}>
+          <Button
+            type="submit"
+            className={styles.Button1}
+            disabled={
+              formData.email.length > 0 &&
+              formData.password.length > 0 &&
+              formData.name.length > 0 &&
+              formData.phoneNumber.length > 0 &&
+              formData.rePassword.length > 0
+                ? false
+                : true
+            }
+          >
+            Бүртгүүлэх
+          </Button>
+          <p>Эсвэл</p>
+          <Link href={'/login'} type="button" className={styles.Button2}>
+            Нэвтрэх
+          </Link>
+        </div>
       </form>
-      
-      <div className='flex w-full h-[870px] bg-white items-center justify-end rounded-r-2xl'>
-        <Image src={Model}
-        className='absolute'
-        width={500}
-        alt='model'
-        />
-        <div className='bg-orange-300 rounded-2xl w-[300px] h-full'></div>
+
+      <div className="flex w-full h-[870px] bg-white items-center justify-end rounded-r-2xl">
+        <Image src={Model} className="absolute" width={500} alt="model" />
+        <div className="bg-orange-300 rounded-2xl w-[300px] h-full"></div>
       </div>
-  
     </div>
   );
 };
-
-
