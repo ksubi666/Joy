@@ -28,10 +28,12 @@ const productSchema = new Schema({
       required: [true, 'Category id required'],
     },
   ],
-  reviewId: {
-    type: Schema.ObjectId,
-    ref: 'review',
-  },
+  reviewId: [
+    {
+      type: Schema.ObjectId,
+      ref: 'review',
+    },
+  ],
   location: [],
 });
 

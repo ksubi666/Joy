@@ -31,7 +31,6 @@ export default function Home() {
   useEffect(() => {
     getCategories();
   }, []);
-
   return (
     <div>
       <MainPage categories={categories.slice(0, 5)} />

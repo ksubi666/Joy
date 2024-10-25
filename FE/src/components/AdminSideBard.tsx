@@ -11,8 +11,8 @@ import {
   PackageOpen,
   Settings,
   SquareUserRound,
+  User,
 } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { axiosInstance } from '@/lib/axios';
@@ -20,7 +20,8 @@ import { axiosInstance } from '@/lib/axios';
 const styles = {
   container: 'h-[850px] w-[400px] border-[1px] rounded-lg',
   avatarContainer: 'flex items-center px-10 gap-3 py-5 border-b',
-  avatarImage: 'size-[80px] rounded-full overflow-hidden relative',
+  avatarImage:
+    'size-[80px] rounded-full overflow-hidden relative bg-gray-200 flex items-end justify-center',
   avatarSubConatiner: 'flex flex-col items-center',
   avatarStatusText: 'flex items-center text-[#5fdba7]',
   avatarName: 'text-[18px] font-semibold',
@@ -74,13 +75,7 @@ const AdminSideBard: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.avatarContainer}>
         <div className={styles.avatarImage}>
-          <Image
-            src={
-              'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611704.jpg'
-            }
-            fill
-            alt="avatar"
-          />
+          <User color="#6b7280" size={70} />
         </div>
         <div className={styles.avatarSubConatiner}>
           <h3 className={styles.avatarName}>Hello</h3>
