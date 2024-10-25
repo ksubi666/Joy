@@ -20,51 +20,57 @@ import { Textarea } from './ui/textarea';
 import ImageSelecter from './ImageSelecter';
 import { useRouter } from 'next/navigation';
 
-const InputField = ({
-  label,
-  placeholder,
-}: {
+interface InputFieldProps {
   label: string;
   placeholder: string;
-}) =>
-  label === 'Description' ? (
+}
+const InputField: React.FC<InputFieldProps> = ({ label, placeholder }) => {
+  return (
     <div className="flex flex-col gap-2">
       <h3>{label}</h3>
-      <Textarea placeholder={placeholder} />
-    </div>
-  ) : (
-    <div className="flex flex-col gap-2">
-      <h3>{label}</h3>
-      <Input placeholder={placeholder} />
+      {label === 'Description' ? (
+        <Textarea placeholder={placeholder} />
+      ) : (
+        <Input placeholder={placeholder} />
+      )}
     </div>
   );
+};
 
-const AdminAddProduct = () => {
-  const [location, setLocation] = useState(null);
+const AdminAddProduct: React.FC = () => {
+  const [location, setLocation] = useState<[number, number] | null>(null);
   const [signedUrl, setSignedUrl] = useState<string | null>(null);
-  const [imageUrls, setImageUrls] = useState<Array<string>>([]);
-  const [category, setCategory] = useState<Array<string> | null>(null);
-  const formRef = useRef<HTMLFormElement | null>(null);
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [category, setCategory] = useState<string[]>([]);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const router = useRouter();
 
   const handlerSubmit = async () => {
-    try {
-      await axiosInstance.post('/product/create', {
-        name: formRef.current[0].value,
+    if (formRef.current) {
+      const formElements = formRef.current
+        .elements as HTMLFormControlsCollection;
+
+      const payload = {
+        name: (formElements[0] as HTMLInputElement).value,
         image: imageUrls,
-        description: formRef.current[1].value,
-        price: formRef.current[2].value,
-        discount: formRef.current[3].value,
+        description: (formElements[1] as HTMLTextAreaElement).value,
+        price: parseFloat((formElements[2] as HTMLInputElement).value),
+        discount: parseFloat((formElements[3] as HTMLInputElement).value),
         categoryId: category,
         location: location,
-      });
-      console.log('Product created successfully');
-      router.prefetch('/admin?menu=Categories');
-    } catch (error) {
-      console.error('Error creating product:', error);
+      };
+
+      try {
+        await axiosInstance.post('/product/create', payload);
+        console.log('Product created successfully');
+        router.prefetch('/admin?menu=Categories');
+      } catch (error) {
+        console.error('Error creating product:', error);
+      }
     }
   };
+
   return (
     <AlertDialog>
       <AlertDialogTrigger className="bg-white text-[#F79A1F] font-bold flex text-[14px] items-center rounded-lg border-[1px] py-2 px-4 border-[#F79A1F]">
