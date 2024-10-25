@@ -48,10 +48,11 @@ const ReviewRating = () => {
     getReviews();
   }, [productId]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formRef.current) {
-      const reviewText = formRef.current[0].value;
+      const reviewText = (formRef.current.elements[0] as HTMLTextAreaElement)
+        .value;
 
       try {
         await axiosInstance.post('/review/create', {

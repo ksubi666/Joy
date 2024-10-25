@@ -16,17 +16,10 @@ import { useRef, useState } from 'react';
 import Map from './Map';
 import { axiosInstance } from '@/lib/axios';
 import ImageSelecter from './ImageSelecter';
+
 const styles = { editContainer: 'flex flex-col gap-2 font-medium' };
-const ProductEditDialog = ({
-  _id,
-  title,
-  price,
-  rating,
-  imgUrl,
-  description,
-  discount,
-  productLocation,
-}: {
+
+interface ProductEditDialogProps {
   _id: string;
   title: string;
   price: string;
@@ -35,24 +28,45 @@ const ProductEditDialog = ({
   description: string;
   discount: string;
   productLocation: [number, number];
+}
+
+const ProductEditDialog: React.FC<ProductEditDialogProps> = ({
+  _id,
+  title,
+  price,
+  rating,
+  imgUrl,
+  description,
+  discount,
+  productLocation,
 }) => {
-  const formRef = useRef();
-  const [category, setCategory] = useState();
-  const [location, setLocation] = useState(productLocation);
+  const formRef = useRef<HTMLFormElement>(null);
+  const [category, setCategory] = useState<string[]>([]);
+  const [location, setLocation] = useState<[number, number]>(productLocation);
   const [signedUrl, setSignedUrl] = useState<string | null>(null);
-  const [imageUrls, setImageUrls] = useState<Array<string>>([]);
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   const handlerClick = async () => {
+    if (!formRef.current) return;
+
+    const form = formRef.current;
+
+    const name = (form.elements[0] as HTMLInputElement)?.value || '';
+    const description = (form.elements[1] as HTMLTextAreaElement)?.value || '';
+    const price = (form.elements[2] as HTMLInputElement)?.value || '';
+    const discount = (form.elements[3] as HTMLInputElement)?.value || '';
+
     await axiosInstance.put(`/product/productUpdate/${_id}`, {
-      name: formRef.current[0].value,
-      description: formRef.current[1].value,
-      price: formRef.current[2].value,
-      discount: formRef.current[3].value,
+      name,
+      description,
+      price,
+      discount,
       categoryId: category,
       location: location,
       image: imageUrls,
     });
   };
+
   return (
     <AlertDialog>
       <AlertDialogTrigger className="text-start">
@@ -74,11 +88,11 @@ const ProductEditDialog = ({
             </div>
             <div className={styles.editContainer}>
               <h3>Price</h3>
-              <Input placeholder={price + '₮'} />
+              <Input placeholder={`${price}₮`} />
             </div>
             <div className={styles.editContainer}>
               <h3>Discount</h3>
-              <Input placeholder={discount + '%'} />
+              <Input placeholder={`${discount}%`} />
             </div>
             <div className={styles.editContainer}>
               <h3>Category</h3>
@@ -87,7 +101,7 @@ const ProductEditDialog = ({
           </div>
           <div className="flex flex-col gap-2">
             <div className={styles.editContainer}>
-              <h3>Category</h3>
+              <h3>Image Upload</h3>
               <ImageSelecter
                 editDialog={true}
                 imageUrls={imageUrls}
@@ -96,7 +110,6 @@ const ProductEditDialog = ({
                 setSignedUrl={setSignedUrl}
               />
             </div>
-
             <div className={styles.editContainer}>
               <h3>Location</h3>
               <div className="w-[455px] h-[200px] rounded-lg overflow-hidden">
@@ -104,6 +117,7 @@ const ProductEditDialog = ({
                   location={location}
                   center={location}
                   setLocation={setLocation}
+                  position={[]}
                 />
               </div>
             </div>
@@ -122,4 +136,5 @@ const ProductEditDialog = ({
     </AlertDialog>
   );
 };
+
 export default ProductEditDialog;

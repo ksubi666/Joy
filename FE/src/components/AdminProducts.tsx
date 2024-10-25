@@ -2,10 +2,24 @@ import ProductEditDialog from './ProductEditDialog';
 import AdminAddCategory from './AdminAddCategory';
 import AdminAddProduct from './AdminAddProduct';
 
-const AdminProducts = ({ products }) => {
+interface Product {
+  _id: string;
+  name: string;
+  price: string;
+  image: string[];
+  description: string;
+  discount: string;
+  location: [number, number];
+}
+
+interface AdminProductsProps {
+  products: Product[];
+}
+
+const AdminProducts: React.FC<AdminProductsProps> = ({ products }) => {
   return (
     <div>
-      <div className=" px-5 pt-5 flex justify-between">
+      <div className="px-5 pt-5 flex justify-between">
         <AdminAddCategory />
         <AdminAddProduct />
       </div>
@@ -13,6 +27,7 @@ const AdminProducts = ({ products }) => {
         {products &&
           products.map((product) => (
             <ProductEditDialog
+              key={product._id}
               _id={product._id}
               title={product.name}
               price={product.price}

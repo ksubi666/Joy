@@ -28,7 +28,7 @@ interface PositionItem {
 }
 
 interface MapProps {
-  center: [number, number];
+  center?: [number, number];
   location: [number, number];
   position: PositionItem[] | null;
   setLocation: Dispatch<SetStateAction<[number, number]>>;
@@ -73,7 +73,7 @@ const Map: React.FC<MapProps> = ({
             </Popup>
           </Marker>
         ))}
-      {setLocation && <MapEvents />}
+      <MapEvents />
     </MapContainer>
   );
 };

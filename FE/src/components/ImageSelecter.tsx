@@ -3,14 +3,23 @@ import { Button } from './ui/button';
 import { useRef } from 'react';
 import { Input } from './ui/input';
 
-const ImageSelecter = ({
+interface ImageSelecterProps {
+  imageUrls: string[];
+  setImageUrls: React.Dispatch<React.SetStateAction<string[]>>;
+  signedUrl: string | null;
+  setSignedUrl: React.Dispatch<React.SetStateAction<string | null>>;
+  editDialog?: boolean;
+}
+
+const ImageSelecter: React.FC<ImageSelecterProps> = ({
   imageUrls,
   setImageUrls,
   signedUrl,
   setSignedUrl,
   editDialog = false,
 }) => {
-  const formRef = useRef();
+  const formRef = useRef<HTMLFormElement | null>(null);
+
   const handleUploadUrl = async () => {
     const randomNumber = Math.floor(10000 + Math.random() * 90000);
     try {
@@ -58,6 +67,7 @@ const ImageSelecter = ({
       console.error('Error uploading image:', error);
     }
   };
+
   const previewImages =
     imageUrls.length > 0
       ? imageUrls.map(
