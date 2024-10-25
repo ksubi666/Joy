@@ -1,4 +1,4 @@
-import { ReviewModel } from 'src/schema/review';
+import { ReviewModel } from '../schema/review';
 import { Request, Response } from 'express';
 
 export const createReview = async (req: Request, res: Response) => {
@@ -20,7 +20,9 @@ export const createReview = async (req: Request, res: Response) => {
 
 export const getReviews = async (_: Request, res: Response) => {
   try {
-    const response = await ReviewModel.find().populate('userId');
+    const response = await ReviewModel.find()
+      .populate('userId')
+      .populate('productId');
     return res.status(200).json(response);
   } catch (error) {
     console.log(error);
@@ -29,10 +31,9 @@ export const getReviews = async (_: Request, res: Response) => {
 };
 
 export const getReview = async (req: Request, res: Response) => {
-  const { id } = req.params;
-
+  const { productId } = req.body;
   try {
-    const response = await ReviewModel.findById(id).populate('userId');
+    const response = await ReviewModel.find({ productId }).populate('userId');
     return res.status(200).json(response);
   } catch (error) {
     console.log(error);

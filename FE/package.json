@@ -26,6 +26,7 @@
     "dotenv": "^16.4.5",
     "embla-carousel-react": "^8.3.0",
     "i": "^0.3.7",
+    "jwt-decode": "^4.0.0",
     "leaflet": "^1.9.4",
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.451.0",
