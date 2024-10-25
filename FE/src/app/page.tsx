@@ -7,9 +7,6 @@ import { useEffect, useState } from 'react';
 import ProductsList from '@/components/ProductsList';
 import { axiosInstance } from '@/lib/axios';
 import { useRouter } from 'next/navigation';
-import ReviewAndRating from '@/components/Review';
-import ReviewRating from '@/components/Review';
-
 interface Category {
   _id: number;
   name: string;
