@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { axiosInstance } from '@/lib/axios';
 import Image from 'next/image';
 import Model from '@/assets/model.png';
+import { useRouter } from 'next/navigation';
 
 interface FormData {
   email: string;
@@ -44,6 +45,7 @@ export const Signup = () => {
 
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<string>('');
+  const router = useRouter();
 
   const togglePasswordVisibility = () => setIsHidePassword((prev) => !prev);
   const Icon = isHidePassword ? EyeOff : EyeIcon;
@@ -74,6 +76,7 @@ export const Signup = () => {
       if (response.status === 200) {
         setSuccess('Амжилттай бүртгэгдлээ!');
         setError('');
+        router.push('/login');
       }
     } catch (error) {
       setError('Алдаа гарлаа! Дахин оролдоно уу.');

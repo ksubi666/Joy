@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import image from '../assets/LoginImage.png';
 import { axiosInstance } from '@/lib/axios';
+import { useRouter } from 'next/navigation';
 
 interface FormData {
   email: string;
@@ -38,6 +39,7 @@ const Login = () => {
 
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<string>('');
+  const router = useRouter();
 
   const togglePasswordVisibility = () => setIsHidePassword((prev) => !prev);
   const Icon = isHidePassword ? EyeOff : EyeIcon;
@@ -61,6 +63,7 @@ const Login = () => {
       if (response.status === 200) {
         setSuccess('Амжилттай нэвтэрлээ!');
         setError('');
+        router.push('/?category=art%20Crafts');
       }
     } catch (error) {
       setError('Имэйл эсвэл нууц үг буруу! Дахин оролдоно уу.');
