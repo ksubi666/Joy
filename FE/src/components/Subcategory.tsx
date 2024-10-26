@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 const styles = {
   subcategory:
     'w-full bg-white text-black py-[32px] flex items-center mx-auto max-w-[1200px]',
@@ -12,10 +14,15 @@ const Subcategory = ({ categories }: { categories: Category[] }) => {
   return (
     <div className={styles.subcategory}>
       {categories &&
-        categories.map((subcategory) => (
-          <button key={subcategory._id} className={styles.button}>
-            {subcategory.name}
-          </button>
+        categories.map((category) => (
+          <Link
+            href={`/?category=${category.name}`}
+            scroll={false}
+            key={category._id}
+            className={styles.button}
+          >
+            {category.name}
+          </Link>
         ))}
     </div>
   );

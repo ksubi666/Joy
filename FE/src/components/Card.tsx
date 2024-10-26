@@ -1,4 +1,6 @@
 'use client';
+import { axiosInstance } from '@/lib/axios';
+import { jwtDecode } from 'jwt-decode';
 import { Heart, Star } from 'lucide-react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -23,19 +25,37 @@ const styles = {
 export const formatPrice = (price: number) => {
   return `${new Intl.NumberFormat('de-DE').format(price)} ₮`;
 };
-
+interface UserDoc {
+  _id: string;
+  name: string;
+}
 const Card = ({
   title,
   price,
   rating,
   imgUrl,
+  product,
 }: {
   title: string;
   price: string;
   rating: string;
   imgUrl: string;
+  product: string;
 }) => {
   const pathname = usePathname();
+  const token = document.cookie;
+  const { _doc }: { _doc: UserDoc } = jwtDecode(token);
+  const user = _doc;
+  const handlerCart = async () => {
+    if (user) {
+      const { data } = await axiosInstance.post('/cart/create', {
+        productId: product,
+        userId: user._id,
+        _id: localStorage.getItem('cartId') && localStorage.getItem('cartId'),
+      });
+      localStorage.setItem('cartId', data._id);
+    }
+  };
   return (
     <div
       className={
@@ -52,18 +72,20 @@ const Card = ({
         {pathname == '/admin' ? null : (
           <Heart className={styles.heart} color="#F4F5F6" />
         )}
-        <div className={styles.rating}>
-          <Star color="#F4F5F6" fill="#F4F5F6" size={16} />
-          <p className="text-[#F4F5F6]">
-            {rating.length == 1 ? rating + '.0' : rating}
-          </p>
-        </div>
+        {pathname == '/admin' ? null : (
+          <div className={styles.rating}>
+            <Star color="#F4F5F6" fill="#F4F5F6" size={16} />
+            <p className="text-[#F4F5F6]">
+              {rating.length == 1 ? rating + '.0' : rating}
+            </p>
+          </div>
+        )}
       </div>
       <div className={styles.titleContainer}>
         <h1 className="text-[18px] ">{title}</h1>
         <div className={styles.priceContainer}>
           <h3 className="text-[20px]">{formatPrice(Number(price))}</h3>
-          <div className={styles.button}>
+          <div onClick={handlerCart} className={styles.button}>
             {pathname == '/admin' ? 'Edit' : 'Add to cart'}
           </div>
         </div>
