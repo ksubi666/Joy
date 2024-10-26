@@ -9,6 +9,7 @@ import { auth } from './routes/Auth';
 import { product } from './routes/Product';
 import { review } from './routes/Review';
 import { cart } from './routes/Cart';
+import { wishlist } from './routes/Wishlist';
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use('/auth', auth);
 app.use('/product', product);
 app.use('/review', review);
 app.use('/cart', cart);
+app.use('/wishlist', wishlist);
 
 app.listen(PORT, () => {
   Connect(process.env.MONGODB_CONNECTION_STRING);

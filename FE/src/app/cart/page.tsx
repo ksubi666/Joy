@@ -87,7 +87,7 @@ const Page = () => {
     );
     return productReviews.length > 0
       ? (totalRating / productReviews.length).toFixed(1)
-      : 'No ratings yet';
+      : '0';
   };
 
   const currentReview = (productId: string) => {
@@ -100,6 +100,7 @@ const Page = () => {
   const renderCartItems = () => {
     return cart.map((el) => (
       <Cart
+        id={el.ProductId._id}
         key={el.ProductId.name}
         image={el.ProductId.image[0]}
         category={
