@@ -70,7 +70,13 @@ const ProductEditDialog: React.FC<ProductEditDialogProps> = ({
   return (
     <AlertDialog>
       <AlertDialogTrigger className="text-start">
-        <Card title={title} price={price} imgUrl={imgUrl} rating={rating} />
+        <Card
+          title={title}
+          price={price}
+          imgUrl={imgUrl}
+          rating={rating}
+          product=""
+        />
       </AlertDialogTrigger>
       <AlertDialogContent className="min-w-[1000px]">
         <AlertDialogHeader>

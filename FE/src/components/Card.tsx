@@ -40,7 +40,7 @@ const Card = ({
   price: string;
   rating: string;
   imgUrl: string;
-  product: string;
+  product: string | '';
 }) => {
   const pathname = usePathname();
   const token = document.cookie;
@@ -54,6 +54,18 @@ const Card = ({
         _id: localStorage.getItem('cartId') && localStorage.getItem('cartId'),
       });
       localStorage.setItem('cartId', data._id);
+    }
+  };
+  const handlerWishlist = async () => {
+    if (user) {
+      const { data } = await axiosInstance.post('/wishlist/create', {
+        productId: product,
+        userId: user._id,
+        _id:
+          localStorage.getItem('wishlistId') &&
+          localStorage.getItem('wishlistId'),
+      });
+      localStorage.setItem('wishlistId', data._id);
     }
   };
   return (
@@ -70,7 +82,9 @@ const Card = ({
         <Image src={imgUrl} alt="" fill objectFit="cover" />
         <div className={styles.overlay}></div>
         {pathname == '/admin' ? null : (
-          <Heart className={styles.heart} color="#F4F5F6" />
+          <div onClick={handlerWishlist}>
+            <Heart className={styles.heart} color="#F4F5F6" />
+          </div>
         )}
         {pathname == '/admin' ? null : (
           <div className={styles.rating}>

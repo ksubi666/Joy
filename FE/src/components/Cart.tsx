@@ -2,6 +2,7 @@
 
 import { Heart, Star } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const Cart = ({
@@ -11,6 +12,7 @@ const Cart = ({
   price,
   comment,
   image,
+  id,
 }: {
   category: string;
   title: string;
@@ -18,11 +20,15 @@ const Cart = ({
   price: string;
   comment: number;
   image: string;
+  id: string;
 }) => {
   const pathname = usePathname();
 
   return (
-    <div className="flex w-full max-h-[180px] justify-between rounded-xl overflow-hidden border-[1px] border-slate-200">
+    <Link
+      href={`/detailpage?product=${id}`}
+      className="flex w-full max-h-[180px] justify-between rounded-xl overflow-hidden border-[1px] border-slate-200"
+    >
       <div className="flex">
         <div className="relative w-[180px] h-[180px]">
           <Image
@@ -48,14 +54,14 @@ const Cart = ({
         </div>
       </div>
       <div className="flex flex-col p-4 text-end gap-3 ">
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-end gap-1">
           <Star color="#fcd34d" fill="#fcd34d" size={20} />
           <p>{rating.length == 1 ? rating + '.0' : rating}</p>
         </div>
         <p className="font-bold text-[30px]">{price}</p>
         <p className="font-semibold">{comment} comments</p>
       </div>
-    </div>
+    </Link>
   );
 };
 
