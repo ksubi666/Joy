@@ -31,9 +31,9 @@ interface PositionItem {
 
 interface MapProps {
   center?: [number, number];
-  location: [number, number];
+  location: [number, number] | null;
   position: PositionItem[] | null;
-  setLocation: Dispatch<SetStateAction<[number, number]>>;
+  setLocation: Dispatch<SetStateAction<[number, number] | null>> | null;
 }
 
 const Map: React.FC<MapProps> = ({
@@ -49,7 +49,9 @@ const Map: React.FC<MapProps> = ({
   const MapEvents = () => {
     useMapEvents({
       click(e) {
-        setLocation([e.latlng.lat, e.latlng.lng]);
+        if (setLocation) {
+          setLocation([e.latlng.lat, e.latlng.lng]);
+        }
         getAddress(e.latlng.lat, e.latlng.lng);
       },
     });
