@@ -11,18 +11,24 @@ import { axiosInstance } from '@/lib/axios';
 
 const styles = {
   container: 'h-full max-w-[1200px] mx-auto flex gap-6 py-5',
-  subContainer: ' w-full min-h-[850px] border-[1px] rounded-lg mb-10',
+  subContainer: 'w-full min-h-[850px] border-[1px] rounded-lg mb-10',
 };
+
 interface Product {
+  _id: string;
   name: string;
   price: string;
   image: string[];
+  description: string;
+  discount: string;
+  location: [number, number];
 }
-const page = () => {
+
+const Page = () => {
   const searchParams = useSearchParams();
   const menu = searchParams.get('menu');
   const router = useRouter();
-  const [products, setProducts] = useState<Product[] | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     if (!menu) {
@@ -36,7 +42,6 @@ const page = () => {
         '/product/getProducts'
       );
       setProducts(data);
-      console.log(data);
     };
     getProducts();
   }, []);
@@ -45,14 +50,19 @@ const page = () => {
     <div className={styles.container}>
       <AdminSideBard />
       <div className={styles.subContainer}>
-        {menu == 'Categories' && <AdminProducts products={products} />}
-        {menu == 'Insight' && <AdminInsight />}
-        {menu == 'Locations' && (
+        {menu === 'Insight' && <AdminInsight />}
+        {menu === 'Categories' && <AdminProducts products={products} />}
+        {menu === 'Locations' && (
           <div className="p-5 h-full w-full">
-            <Map center={[47.913938, 106.916631]} position={products} />
+            <Map
+              center={[47.913938, 106.916631]}
+              position={products}
+              location={null}
+              setLocation={null}
+            />
           </div>
         )}
-        {menu == 'Orders' && (
+        {menu === 'Orders' && (
           <div className="h-fit rounded-lg flex flex-col gap-1 overflow-y-auto">
             <InsightOrderTitles />
             <InsightOrders />
@@ -67,4 +77,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

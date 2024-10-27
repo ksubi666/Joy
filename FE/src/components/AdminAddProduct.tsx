@@ -100,7 +100,11 @@ const AdminAddProduct: React.FC = () => {
             <div className="flex flex-col gap-2">
               <h3>Location</h3>
               <div className="rounded-lg overflow-hidden h-[200px]">
-                <Map setLocation={setLocation} location={location} />
+                <Map
+                  setLocation={setLocation}
+                  location={location}
+                  position={null}
+                />
               </div>
             </div>
           </div>
