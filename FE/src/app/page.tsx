@@ -2,6 +2,9 @@
 
 import Subcategory from '@/components/Subcategory';
 import MainPage from '../components/MainPage';
+import Card from '@/components/Card';
+import Trending from '@/components/Trending';
+import Image from 'next/image';
 import React from 'react';
 import { useEffect, useState } from 'react';
 import ProductsList from '@/components/ProductsList';
@@ -36,6 +39,8 @@ export default function Home() {
       <MainPage categories={categories.slice(0, 5)} />
       <Subcategory categories={categories.slice(5, 30)} />
       <ProductsList />
+      
+      <Trending />
     </div>
   );
 }
