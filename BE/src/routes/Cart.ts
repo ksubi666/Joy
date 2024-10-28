@@ -1,7 +1,10 @@
 import { Router } from 'express';
-import { createCart, getCart } from '../controller/cart';
+import { createCart, deleteCartItem, getCart } from '../controller/cart';
 const cart = Router();
 
-cart.post('/create', createCart as any).get('/getCart/:id', getCart as any);
+cart
+  .post('/create', createCart as any)
+  .get('/getCart/:id', getCart as any)
+  .delete('/deleteCartItem', deleteCartItem as any);
 
 export { cart };
