@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import Card from './Card';
 import { axiosInstance } from '@/lib/axios';
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import _ from 'lodash';
 
@@ -76,15 +75,13 @@ const ProductsList = () => {
         const averageRating = calculateAverageRating(ratings);
 
         return (
-          <Link key={product._id} href={`/detailpage?product=${product._id}`}>
-            <Card
-              title={product.name}
-              price={product.price}
-              product={product._id}
-              imgUrl={`https://pub-085cb38b95fb4b51936e3f399499e3cd.r2.dev/joy/${product.image[0]}`}
-              rating={averageRating.toString()}
-            />
-          </Link>
+          <Card
+            title={product.name}
+            price={product.price}
+            product={product._id}
+            imgUrl={`https://pub-085cb38b95fb4b51936e3f399499e3cd.r2.dev/joy/${product.image[0]}`}
+            rating={averageRating.toString()}
+          />
         );
       })}
     </div>

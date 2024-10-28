@@ -1,14 +1,17 @@
 'use client';
+
 import { axiosInstance } from '@/lib/axios';
 import { jwtDecode } from 'jwt-decode';
 import { Heart, Star } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
 const styles = {
   container:
     'border-[1px] rounded-xl w-[280px] flex flex-col items-center justify-between',
   adminContainer:
-    'border-[1px] rounded-xl w-[266px] flex flex-col items-center justify-center ',
+    'border-[1px] rounded-xl w-[266px] flex flex-col items-center justify-center',
   imgContainer: 'w-[280px] h-[280px] relative rounded-t-xl overflow-hidden',
   adminImgContainer:
     'w-[266px] h-[266px] relative rounded-t-xl overflow-hidden',
@@ -25,10 +28,12 @@ const styles = {
 export const formatPrice = (price: number) => {
   return `${new Intl.NumberFormat('de-DE').format(price)} ₮`;
 };
+
 interface UserDoc {
   _id: string;
   name: string;
 }
+
 const Card = ({
   title,
   price,
@@ -44,67 +49,79 @@ const Card = ({
 }) => {
   const pathname = usePathname();
   const token = document.cookie;
-  const { _doc }: { _doc: UserDoc } = jwtDecode(token);
-  const user = _doc;
-  const handlerCart = async () => {
+
+  let user: UserDoc | null = null;
+  try {
+    const { _doc }: { _doc: UserDoc } = jwtDecode(token);
+    user = _doc;
+  } catch (error) {
+    console.error('Token decoding error:', error);
+  }
+
+  const handlerCart = async (e: React.MouseEvent) => {
+    e.preventDefault();
+
     if (user) {
       const { data } = await axiosInstance.post('/cart/create', {
         productId: product,
         userId: user._id,
-        _id: localStorage.getItem('cartId') && localStorage.getItem('cartId'),
+        _id: localStorage.getItem('cartId') || null,
       });
       localStorage.setItem('cartId', data._id);
     }
   };
-  const handlerWishlist = async () => {
+
+  const handlerWishlist = async (e: React.MouseEvent) => {
+    e.preventDefault();
+
     if (user) {
       const { data } = await axiosInstance.post('/wishlist/create', {
         productId: product,
         userId: user._id,
-        _id:
-          localStorage.getItem('wishlistId') &&
-          localStorage.getItem('wishlistId'),
+        _id: localStorage.getItem('wishlistId') || null,
       });
       localStorage.setItem('wishlistId', data._id);
     }
   };
+
   return (
-    <div
+    <Link
+      href={`/detailpage?product=${product}`}
       className={
-        pathname == '/admin' ? styles.adminContainer : styles.container
+        pathname === '/admin' ? styles.adminContainer : styles.container
       }
     >
       <div
         className={
-          pathname == '/admin' ? styles.adminImgContainer : styles.imgContainer
+          pathname === '/admin' ? styles.adminImgContainer : styles.imgContainer
         }
       >
-        <Image src={imgUrl} alt="" fill objectFit="cover" />
+        <Image src={imgUrl} alt={title} fill objectFit="cover" />
         <div className={styles.overlay}></div>
-        {pathname == '/admin' ? null : (
-          <div onClick={handlerWishlist}>
-            <Heart className={styles.heart} color="#F4F5F6" />
-          </div>
-        )}
-        {pathname == '/admin' ? null : (
-          <div className={styles.rating}>
-            <Star color="#F4F5F6" fill="#F4F5F6" size={16} />
-            <p className="text-[#F4F5F6]">
-              {rating.length == 1 ? rating + '.0' : rating}
-            </p>
-          </div>
+        {pathname !== '/admin' && (
+          <>
+            <div onClick={handlerWishlist}>
+              <Heart className={styles.heart} color="#F4F5F6" />
+            </div>
+            <div className={styles.rating}>
+              <Star color="#F4F5F6" fill="#F4F5F6" size={16} />
+              <p className="text-[#F4F5F6]">
+                {rating.length === 1 ? `${rating}.0` : rating}
+              </p>
+            </div>
+          </>
         )}
       </div>
       <div className={styles.titleContainer}>
-        <h1 className="text-[18px] ">{title}</h1>
+        <h1 className="text-[18px]">{title}</h1>
         <div className={styles.priceContainer}>
           <h3 className="text-[20px]">{formatPrice(Number(price))}</h3>
           <div onClick={handlerCart} className={styles.button}>
-            {pathname == '/admin' ? 'Edit' : 'Add to cart'}
+            {pathname === '/admin' ? 'Edit' : 'Add to cart'}
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
