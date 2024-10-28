@@ -1,9 +1,11 @@
 'use client';
 
-import { Heart, Star } from 'lucide-react';
+import { Heart, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { StarRating } from './StartRating';
+import { axiosInstance } from '@/lib/axios';
 
 const Cart = ({
   category,
@@ -24,6 +26,25 @@ const Cart = ({
 }) => {
   const pathname = usePathname();
 
+  const cartId = localStorage.getItem('cartId');
+  const wishlistId = localStorage.getItem('wishlistId');
+
+  const handlerDeleteCartItem = async () => {
+    await axiosInstance.delete('/cart/deleteCartItem', {
+      data: {
+        productId: id,
+        id: cartId,
+      },
+    });
+  };
+  const handlerDeleteWishlistItem = async () => {
+    await axiosInstance.delete('/wishlist/deleteWishlistItem', {
+      data: {
+        productId: id,
+        id: wishlistId,
+      },
+    });
+  };
   return (
     <Link
       href={`/detailpage?product=${id}`}
@@ -54,12 +75,21 @@ const Cart = ({
         </div>
       </div>
       <div className="flex flex-col p-4 text-end gap-3 ">
-        <div className="flex items-center justify-end gap-1">
-          <Star color="#fcd34d" fill="#fcd34d" size={20} />
-          <p>{rating.length == 1 ? rating + '.0' : rating}</p>
+        <div
+          className="flex justify-end"
+          onClick={
+            pathname == '/cart'
+              ? handlerDeleteCartItem
+              : handlerDeleteWishlistItem
+          }
+        >
+          <X size={20} color="#272727" />
         </div>
         <p className="font-bold text-[30px]">{price}</p>
-        <p className="font-semibold">{comment} comments</p>
+        <div className="flex flex-col items-end gap-1">
+          <StarRating rating={Number(rating)} />
+          <p className="font-meduim">{comment} comments</p>
+        </div>
       </div>
     </Link>
   );
