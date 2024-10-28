@@ -1,12 +1,15 @@
-import { Card } from './ui/card';
+import Card from '@/components/Card';
+import Image from 'next/image';
+import React from 'react';
 
-const Trending = () => {
+export default function Trending() {
   return (
-    <div className="p-20">
-      <h1 className="font-bold text-xl py-10">Trending</h1>
-      <Card />
+    <div className='flex'>
+      <div>
+        <h3 className='text-red-600 text-[20px] font-bold'>EXCLUSIVE TO JOY</h3>
+        <h1 className='text-gray-900 text-[50px] font-bold'>Trending</h1>
+      </div>
+     
     </div>
   );
-};
-
-export default Trending;
+}
