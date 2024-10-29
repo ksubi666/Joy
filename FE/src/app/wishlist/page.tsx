@@ -33,19 +33,22 @@ const Page = () => {
   const [wishlist, setWishlist] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Record<string, Category[]>>({});
   const [reviews, setReviews] = useState<Review[]>([]);
-
-  const wishlistId = localStorage.getItem('wishlistId');
+  const [wishlistId, setWishlistId] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    const fetchData = async () => {
-      await Promise.all([
-        fetchWishlistItems(),
-        fetchCategories(),
-        getReviews(),
-      ]);
+    const storedWishlistId = localStorage.getItem('wishlistId');
+    setWishlistId(storedWishlistId);
+  }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
       if (wishlistId) {
+        await Promise.all([
+          fetchWishlistItems(),
+          fetchCategories(),
+          getReviews(),
+        ]);
         router.push(`/wishlist?id=${wishlistId}`);
       }
     };
@@ -66,7 +69,7 @@ const Page = () => {
       );
       setWishlist(data.wishlist.products);
     } catch (error) {
-      console.error('Failed to fetch cart items:', error);
+      console.error('Failed to fetch wishlist items:', error);
     }
   };
 
