@@ -43,6 +43,7 @@ export default function Home() {
       <ProductsList />
       {/* <AppointmentScheduler /> */}
       <AppointmentSidebar />
+      
     </div>
   );
 }
