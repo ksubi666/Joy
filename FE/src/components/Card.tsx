@@ -116,7 +116,10 @@ const Card = ({
         <h1 className="text-[18px]">{title}</h1>
         <div className={styles.priceContainer}>
           <h3 className="text-[20px]">{formatPrice(Number(price))}</h3>
-          <div onClick={handlerCart} className={styles.button}>
+          <div
+            onClick={pathname == '/admin' ? undefined : handlerCart}
+            className={styles.button}
+          >
             {pathname === '/admin' ? 'Edit' : 'Add to cart'}
           </div>
         </div>

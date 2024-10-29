@@ -46,7 +46,8 @@ const ProductEditDialog: React.FC<ProductEditDialogProps> = ({
   const [signedUrl, setSignedUrl] = useState<string | null>(null);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 
-  const handlerClick = async () => {
+  const handlerClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
     if (!formRef.current) return;
 
     const form = formRef.current;
@@ -75,7 +76,7 @@ const ProductEditDialog: React.FC<ProductEditDialogProps> = ({
           price={price}
           imgUrl={imgUrl}
           rating={rating}
-          product=""
+          product={_id}
         />
       </AlertDialogTrigger>
       <AlertDialogContent className="min-w-[1000px]">
@@ -123,7 +124,7 @@ const ProductEditDialog: React.FC<ProductEditDialogProps> = ({
                   location={location}
                   center={location}
                   setLocation={setLocation}
-                  position={[]}
+                  position={null}
                 />
               </div>
             </div>

@@ -1,13 +1,12 @@
 import { CheckCircle } from 'lucide-react';
+import OrderSheet from './OrderSheet';
 
 const SubtotalSection = ({ totalPrice }: { totalPrice: string }) => {
   return (
     <div className="mt-20 gap-4 border-[1px] border-slate-200 rounded-xl flex flex-col p-6 justify-center">
       <h1 className="font-bold text-[24px]">Total</h1>
       <p className="font-bold text-[30px] text-orange-500">{totalPrice}</p>
-      <button className="rounded-3xl max-w-[400px] bg-[#EB4F47] text-white font-bold text-[18px] py-2 px-8 justify-center flex">
-        Order now
-      </button>
+      <OrderSheet />
       <PaymentInfo />
     </div>
   );
