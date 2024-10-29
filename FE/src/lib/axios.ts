@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 
 export const axiosInstance: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: 'https://joy-backend.vercel.app',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
