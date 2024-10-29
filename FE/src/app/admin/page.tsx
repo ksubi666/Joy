@@ -1,13 +1,35 @@
 'use client';
 import { useEffect, useState } from 'react';
-import AdminInsight from '@/components/AdminInsight';
-import AdminProducts from '@/components/AdminProducts';
-import AdminSideBard from '@/components/AdminSideBard';
 import { useRouter, useSearchParams } from 'next/navigation';
-import Map from '@/components/Map';
-import InsightOrderTitles from '@/components/InsightOrderTitles';
-import InsightOrders from '@/components/InsightOrders';
 import { axiosInstance } from '@/lib/axios';
+import dynamic from 'next/dynamic';
+const InsightOrders = dynamic(() => import('@/components/InsightOrders'), {
+  ssr: false,
+});
+const InsightOrderTitles = dynamic(
+  () => import('@/components/InsightOrderTitles'),
+  {
+    ssr: false,
+  }
+);
+const Map = dynamic(() => import('@/components/Map'), {
+  ssr: false,
+});
+const AdminSideBard = dynamic(() => import('@/components/AdminSideBard'), {
+  ssr: false,
+});
+const AdminProducts = dynamic(() => import('@/components/AdminProducts'), {
+  ssr: false,
+});
+const AdminInsight = dynamic(() => import('@/components/AdminInsight'), {
+  ssr: false,
+});
+// import AdminInsight from '@/components/AdminInsight';
+// import AdminProducts from '@/components/AdminProducts';
+// import AdminSideBard from '@/components/AdminSideBard';
+// import Map from '@/components/Map';
+// import InsightOrderTitles from '@/components/InsightOrderTitles';
+// import InsightOrders from '@/components/InsightOrders';
 
 const styles = {
   container: 'h-full max-w-[1200px] mx-auto flex gap-6 py-5',

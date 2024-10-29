@@ -1,11 +1,21 @@
 'use client';
-
-import Subcategory from '@/components/Subcategory';
-import MainPage from '../components/MainPage';
+import dynamic from 'next/dynamic';
+// import Subcategory from '@/components/Subcategory';
+// import MainPage from '../components/MainPage';
 import { useEffect, useState } from 'react';
-import ProductsList from '@/components/ProductsList';
+// import ProductsList from '@/components/ProductsList';
 import { axiosInstance } from '@/lib/axios';
 import { useRouter } from 'next/navigation';
+
+const ProductsList = dynamic(() => import('@/components/ProductsList'), {
+  ssr: false,
+});
+const Subcategory = dynamic(() => import('@/components/Subcategory'), {
+  ssr: false,
+});
+const MainPage = dynamic(() => import('../components/MainPage'), {
+  ssr: false,
+});
 
 interface Category {
   _id: number;

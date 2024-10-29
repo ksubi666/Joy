@@ -1,11 +1,15 @@
 'use client';
-import Cart from '@/components/Cart';
 import { axiosInstance } from '@/lib/axios';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
-import SubtotalSection from '@/components/SubTotalSection';
+import dynamic from 'next/dynamic';
 import { formatPrice } from '@/components/Card';
+
+const SubtotalSection = dynamic(() => import('@/components/SubTotalSection'), {
+  ssr: false,
+});
+const Cart = dynamic(() => import('@/components/Cart'), { ssr: false });
 
 interface Product {
   ProductId: {
@@ -34,20 +38,25 @@ const Page = () => {
   const [cart, setCart] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Record<string, Category[]>>({});
   const [reviews, setReviews] = useState<Review[]>([]);
-
-  const cartId = localStorage.getItem('cartId');
+  const [cartId, setCartId] = useState<string | null>(null);
   const router = useRouter();
+
+  useEffect(() => {
+    const storedCartId = window.localStorage.getItem('cartId');
+    setCartId(storedCartId);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       await Promise.all([fetchCartItems(), fetchCategories(), getReviews()]);
-
       if (cartId) {
         router.push(`/cart?id=${cartId}`);
       }
     };
 
-    fetchData();
+    if (cartId) {
+      fetchData();
+    }
   }, [cartId, router]);
 
   const getReviews = async () => {
@@ -57,12 +66,8 @@ const Page = () => {
 
   const fetchCartItems = async () => {
     if (!cartId) return;
-    try {
-      const { data } = await axiosInstance.get(`/cart/getCart/${cartId}`);
-      setCart(data.products);
-    } catch (error) {
-      console.error('Failed to fetch cart items:', error);
-    }
+    const { data } = await axiosInstance.get(`/cart/getCart/${cartId}`);
+    setCart(data.products);
   };
 
   const fetchCategories = async () => {
