@@ -38,7 +38,7 @@ const InputField: React.FC<InputFieldProps> = ({ label, placeholder }) => {
 };
 
 const AdminAddProduct: React.FC = () => {
-  const [location, setLocation] = useState<[number, number] | null>(null);
+  const [location, setLocation] = useState<[number, number]>([0, 0]);
   const [signedUrl, setSignedUrl] = useState<string | null>(null);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [category, setCategory] = useState<string[]>([]);
