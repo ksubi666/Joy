@@ -10,6 +10,8 @@ import { useEffect, useState } from 'react';
 import ProductsList from '@/components/ProductsList';
 import { axiosInstance } from '@/lib/axios';
 import { useRouter } from 'next/navigation';
+import AppointmentScheduler from '@/components/Order';
+import AppointmentSidebar from '@/components/Order';
 interface Category {
   _id: number;
   name: string;
@@ -39,8 +41,8 @@ export default function Home() {
       <MainPage categories={categories.slice(0, 5)} />
       <Subcategory categories={categories.slice(5, 30)} />
       <ProductsList />
-      
-      <Trending />
+      {/* <AppointmentScheduler /> */}
+      <AppointmentSidebar />
     </div>
   );
 }
