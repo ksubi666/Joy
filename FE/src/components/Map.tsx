@@ -33,7 +33,7 @@ interface MapProps {
   center?: [number, number];
   location: [number, number] | null;
   position: PositionItem[] | null;
-  setLocation: Dispatch<SetStateAction<[number, number] | null>> | null;
+  setLocation: Dispatch<SetStateAction<[number, number]>> | null;
 }
 
 const Map: React.FC<MapProps> = ({
