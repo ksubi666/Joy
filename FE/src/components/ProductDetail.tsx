@@ -9,6 +9,7 @@ import { useSearchParams } from 'next/navigation';
 import { axiosInstance } from '@/lib/axios';
 import { formatPrice } from './Card';
 import ReviewRating from './Review';
+import { jwtDecode } from 'jwt-decode';
 
 interface Category {
   name: string;
@@ -23,13 +24,27 @@ interface Product {
   description: string;
   location: [number, number];
 }
-
+interface DecodedToken {
+  _doc: {
+    _id: string;
+  };
+}
 const ProductDetail: React.FC = () => {
+  const [user, setUser] = useState<DecodedToken | null>(null);
   const [imageUrl, setImageUrl] = useState<string>('');
   const searchParams = useSearchParams();
   const productId = searchParams.get('product');
   const [products, setProducts] = useState<Product[]>([]);
-
+  useEffect(() => {
+    const token = document.cookie;
+    try {
+      const decodedToken = jwtDecode<DecodedToken>(token);
+      setUser(decodedToken);
+    } catch (error) {
+      console.error('Invalid token:', error);
+      setUser(null);
+    }
+  }, []);
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -49,7 +64,28 @@ const ProductDetail: React.FC = () => {
     };
     getProducts();
   }, [productId]);
-
+  const handlerCart = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (user) {
+      const { data } = await axiosInstance.post('/cart/create', {
+        productId: products[0]._id,
+        userId: user._doc._id,
+        _id: localStorage.getItem('cartId') || null,
+      });
+      localStorage.setItem('cartId', data._id);
+    }
+  };
+  const handlerWishlist = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (user) {
+      const { data } = await axiosInstance.post('/wishlist/create', {
+        productId: products[0]._id,
+        userId: user._doc._id,
+        _id: localStorage.getItem('wishlistId') || null,
+      });
+      localStorage.setItem('wishlistId', data._id);
+    }
+  };
   return (
     <>
       {products.map((product) => (
@@ -88,8 +124,13 @@ const ProductDetail: React.FC = () => {
                 Price: {formatPrice(Number(product.price))}
               </p>
               <div className="flex w-full items-center gap-7">
-                <Heart size={30} />
-                <Button className="bg-[#EB4F47] hover:bg-[#EB4F47] font-bold w-full h-12">
+                <div className="cursor-pointer" onClick={handlerWishlist}>
+                  <Heart size={30} className="hover:fill-black" />
+                </div>
+                <Button
+                  onClick={handlerCart}
+                  className="bg-[#EB4F47] hover:bg-[#EB4F47] font-bold w-full h-12"
+                >
                   Add to Cart
                 </Button>
               </div>
@@ -116,5 +157,4 @@ const ProductDetail: React.FC = () => {
     </>
   );
 };
-
 export default ProductDetail;

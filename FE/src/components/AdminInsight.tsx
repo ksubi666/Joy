@@ -26,12 +26,21 @@ interface Review {
   content?: string;
   rating?: number;
 }
+interface Order {
+  status: string;
+  userId: { name: string };
+  phone: string;
+  date: string;
+  createdDate: string;
+  time: string;
+  orderNumber: string;
+}
 
 interface ReviewsGrouped {
   [key: string]: Review[];
 }
 
-const AdminInsight = () => {
+const AdminInsight = ({ orders }: { orders: Order[] }) => {
   const d = new Date();
   const monthName = month[d.getMonth()];
   const lastMonthName = month[d.getMonth() - 1] || month[11];
@@ -64,7 +73,11 @@ const AdminInsight = () => {
     <div className="w-full h-[850px] p-5 flex flex-col gap-5">
       <div className="flex gap-5 h-fit">
         <div className="grid grid-rows-3 min-h-[150px] w-[calc(50%)] gap-5">
-          <InsightCard title="Order" count="100" percent="" />
+          <InsightCard
+            title="Order"
+            count={orders.length.toString()}
+            percent=""
+          />
           <InsightCard
             title="Review"
             count={(reviews[monthName]?.length || 0).toString()}

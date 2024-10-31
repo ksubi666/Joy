@@ -105,6 +105,7 @@ const Page = () => {
   const renderCartItems = () => {
     return cart.map((el) => (
       <Cart
+        isOrder={false}
         id={el.ProductId._id}
         key={el.ProductId.name}
         image={el.ProductId.image[0]}
@@ -123,7 +124,12 @@ const Page = () => {
     <div className="max-w-[1440px] px-[120px] mx-auto flex flex-col gap-5 pt-7 pb-20 h-fit">
       <h1 className="text-[25px] font-bold">Shopping cart</h1>
       {renderCartItems()}
-      <SubtotalSection totalPrice={formatPrice(calculateTotalPrice())} />
+      <SubtotalSection
+        cart={cart}
+        reviews={reviews}
+        categories={categories}
+        totalPrice={formatPrice(calculateTotalPrice())}
+      />
     </div>
   );
 };

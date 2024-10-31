@@ -16,6 +16,7 @@ import {
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { axiosInstance } from '@/lib/axios';
+import { jwtDecode } from 'jwt-decode';
 
 const styles = {
   container: 'h-[850px] w-[400px] border-[1px] rounded-lg',
@@ -24,7 +25,7 @@ const styles = {
     'size-[80px] rounded-full overflow-hidden relative bg-gray-200 flex items-end justify-center',
   avatarSubConatiner: 'flex flex-col items-center',
   avatarStatusText: 'flex items-center text-[#5fdba7]',
-  avatarName: 'text-[18px] font-semibold',
+  avatarName: 'text-[18px] font-semibold capitalize',
   general: 'py-5 px-10 border-b text-[18px] font-semibold',
   menuContainer:
     'flex justify-between items-center cursor-pointer px-10 py-4 hover:bg-gray-100 rounded-lg',
@@ -51,9 +52,13 @@ const sideBarMenu: SideBarMenu = {
   Contacts: <SquareUserRound />,
   Settings: <Settings />,
 };
-
+interface docType {
+  name: string;
+}
 const AdminSideBard: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
+  const token = document.cookie;
+  const { _doc }: { _doc: docType } = jwtDecode(token);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -78,7 +83,7 @@ const AdminSideBard: React.FC = () => {
           <User color="#6b7280" size={70} />
         </div>
         <div className={styles.avatarSubConatiner}>
-          <h3 className={styles.avatarName}>Hello</h3>
+          <h3 className={styles.avatarName}>{_doc.name}</h3>
           <span className={styles.avatarStatusText}>
             <Dot strokeWidth={8} size={18} color="#5fdba7" />
             Online

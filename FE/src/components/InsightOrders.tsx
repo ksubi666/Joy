@@ -7,19 +7,35 @@ export const styles = {
   subContainer: 'flex pl-4 items-center',
   orderContainer: 'w-full h-fit grid grid-cols-5 border-b text-[14px] ',
 };
-const InsightOrders = () => {
+const InsightOrders = ({
+  userName,
+  phoneNumber,
+  date,
+  createdAt,
+  time,
+  orderNumber,
+  status,
+}: {
+  userName: string;
+  phoneNumber: string;
+  date: string;
+  time: string;
+  createdAt: string;
+  orderNumber: string;
+  status: string;
+}) => {
   return (
     <div className={styles.orderContainer}>
-      <div className={styles.subContainer}>#123123</div>
-      <div className="flex p-4 flex-col items-start">
-        <h3>name</h3>
-        <p>89898989</p>
+      <div className={styles.subContainer}>#{orderNumber}</div>
+      <div className="flex p-4 flex-col items-start gap-1">
+        <h3>{userName}</h3>
+        <p>{phoneNumber}</p>
       </div>
-      <div className={styles.subContainer}>October 13, 2014 11:13:00</div>
+      <div className={styles.subContainer}>{date + '-' + time}</div>
       <div className={styles.subContainer}>
-        <Button className={styles.statusButton}>status</Button>
+        <Button className={styles.statusButton}>{status}</Button>
       </div>
-      <div className={styles.subContainer}>October 13, 2014 11:13:00</div>
+      <div className={styles.subContainer}>{createdAt + ' 00:00'}</div>
     </div>
   );
 };

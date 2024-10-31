@@ -4,16 +4,15 @@ import { UserModel } from '../schema/user';
 import { Response, Request } from 'express';
 
 export const Login = async (req: Request, res: Response): Promise<any> => {
-  const { email, password } = req.body;
+  const { email, password, role } = req.body;
 
   try {
-    const response = await UserModel.findOne({ email });
-    console.log(response, 'response')
+    const response = await UserModel.findOne({ email, role });
+    console.log(response, 'response');
     if (!response) return res.status(404).send('User not found');
 
     bcrypt.compare(password, response.password, (_err, result) => {
       if (result) {
-        
         const token = jwt.sign({ ...response }, 'password123');
 
         return res.status(200).cookie('token', token).end();
@@ -28,8 +27,6 @@ export const Login = async (req: Request, res: Response): Promise<any> => {
 };
 
 const saltRounds: number = 10;
-
-
 
 export const Signup = async (req: Request, res: Response): Promise<any> => {
   const { name, email, password, phoneNumber } = req.body;
