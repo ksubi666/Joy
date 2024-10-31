@@ -10,6 +10,7 @@ import { product } from './routes/Product';
 import { review } from './routes/Review';
 import { cart } from './routes/Cart';
 import { wishlist } from './routes/Wishlist';
+import { order } from './routes/Order';
 
 dotenv.config();
 
@@ -21,7 +22,7 @@ app.use(bodyParser.json());
 app.use(
   cors({
     credentials: true,
-    origin: 'https://joy-omega.vercel.app',
+    origin: 'http://localhost:3000',
   })
 );
 
@@ -33,6 +34,7 @@ app.use('/product', product);
 app.use('/review', review);
 app.use('/cart', cart);
 app.use('/wishlist', wishlist);
+app.use('/order', order);
 
 app.listen(PORT, () => {
   Connect(process.env.MONGODB_CONNECTION_STRING);

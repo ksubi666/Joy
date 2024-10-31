@@ -26,7 +26,7 @@ const ReviewRating = () => {
   const searchParams = useSearchParams();
   const productId = searchParams.get('product');
 
-  const token = document.cookie;
+  const token = window.document.cookie;
   const { _doc }: { _doc: UserDoc } = jwtDecode(token);
   const user = _doc;
 

@@ -15,6 +15,7 @@ const Cart = ({
   comment,
   image,
   id,
+  isOrder,
 }: {
   category: string;
   title: string;
@@ -23,6 +24,7 @@ const Cart = ({
   comment: number;
   image: string;
   id: string;
+  isOrder: boolean;
 }) => {
   const pathname = usePathname();
   const cartId = localStorage.getItem('cartId');
@@ -49,10 +51,20 @@ const Cart = ({
   return (
     <Link
       href={`/detailpage?product=${id}`}
-      className="flex w-full max-h-[180px] justify-between rounded-xl overflow-hidden border-[1px] border-slate-200"
+      className={
+        isOrder
+          ? 'flex w-full min-h-[100px] justify-between rounded-xl overflow-hidden border-[1px] border-slate-200'
+          : 'flex w-full max-h-[180px] justify-between rounded-xl overflow-hidden border-[1px] border-slate-200'
+      }
     >
       <div className="flex">
-        <div className="relative w-[180px] h-[180px]">
+        <div
+          className={
+            isOrder
+              ? 'relative min-w-[100px] min-h-[100px]'
+              : 'relative w-[180px] h-[180px]'
+          }
+        >
           <Image
             src={`https://pub-085cb38b95fb4b51936e3f399499e3cd.r2.dev/joy/${image}`}
             alt={title}
@@ -68,18 +80,46 @@ const Cart = ({
             />
           )}
         </div>
-        <div className="p-4 flex flex-col gap-3">
-          <h1 className="text-[18px] text-gray-500 uppercase font-bold">
+        <div
+          className={
+            isOrder ? 'p-4 flex flex-col gap-2' : 'p-4 flex flex-col gap-3'
+          }
+        >
+          <h1
+            className={
+              isOrder
+                ? 'text-[10px] text-gray-500 uppercase font-bold'
+                : 'text-[18px] text-gray-500 uppercase font-bold'
+            }
+          >
             {category}
           </h1>
-          <h3 className="text-[18px] font-bold">{title}</h3>
+          <h3
+            className={
+              isOrder ? 'text-[11px] font-bold' : 'text-[18px] font-bold'
+            }
+          >
+            {isOrder ? title.slice(0, 39) + '...' : title}
+          </h3>
         </div>
       </div>
-      <div className="flex flex-col p-4 text-end gap-3 ">
+      <div
+        className={
+          isOrder
+            ? 'flex flex-col p-4 text-end gap-2 '
+            : 'flex flex-col p-4 text-end gap-3 '
+        }
+      >
         <div className="flex justify-end" onClick={handleDeleteItem}>
-          <X size={20} color="#272727" />
+          <X size={isOrder ? 14 : 20} color="#272727" />
         </div>
-        <p className="font-bold text-[30px]">{price}</p>
+        <p
+          className={
+            isOrder ? 'font-bold text-[14px]' : 'font-bold text-[30px]'
+          }
+        >
+          {price}
+        </p>
         <div className="flex flex-col items-end gap-1">
           <StarRating rating={Number(rating)} />
           <p className="font-medium">{comment} comments</p>

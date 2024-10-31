@@ -1,8 +1,10 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { axiosInstance } from '@/lib/axios';
 import dynamic from 'next/dynamic';
+
 const InsightOrders = dynamic(() => import('@/components/InsightOrders'), {
   ssr: false,
 });
@@ -24,12 +26,6 @@ const AdminProducts = dynamic(() => import('@/components/AdminProducts'), {
 const AdminInsight = dynamic(() => import('@/components/AdminInsight'), {
   ssr: false,
 });
-// import AdminInsight from '@/components/AdminInsight';
-// import AdminProducts from '@/components/AdminProducts';
-// import AdminSideBard from '@/components/AdminSideBard';
-// import Map from '@/components/Map';
-// import InsightOrderTitles from '@/components/InsightOrderTitles';
-// import InsightOrders from '@/components/InsightOrders';
 
 const styles = {
   container: 'h-full max-w-[1200px] mx-auto flex gap-6 py-5',
@@ -46,11 +42,22 @@ interface Product {
   location: [number, number];
 }
 
+interface Order {
+  status: string;
+  userId: { name: string };
+  phone: string;
+  date: string;
+  createdDate: string;
+  time: string;
+  orderNumber: string;
+}
+
 const Page = () => {
   const searchParams = useSearchParams();
   const menu = searchParams.get('menu');
   const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {
     if (!menu) {
@@ -65,6 +72,14 @@ const Page = () => {
       );
       setProducts(data);
     };
+
+    const getOrders = async () => {
+      const { data } = await axiosInstance.get<Order[]>('/order/getOrders');
+      setOrders(data);
+      console.log(data);
+    };
+
+    getOrders();
     getProducts();
   }, []);
 
@@ -72,7 +87,7 @@ const Page = () => {
     <div className={styles.container}>
       <AdminSideBard />
       <div className={styles.subContainer}>
-        {menu === 'Insight' && <AdminInsight />}
+        {menu === 'Insight' && <AdminInsight orders={orders} />}
         {menu === 'Categories' && <AdminProducts products={products} />}
         {menu === 'Locations' && (
           <div className="p-5 h-full w-full">
@@ -87,11 +102,21 @@ const Page = () => {
         {menu === 'Orders' && (
           <div className="h-fit rounded-lg flex flex-col gap-1 overflow-y-auto">
             <InsightOrderTitles />
-            <InsightOrders />
-            <InsightOrders />
-            <InsightOrders />
-            <InsightOrders />
-            <InsightOrders />
+            {orders.length > 0 ? (
+              orders.map((order) => (
+                <InsightOrders
+                  status={order.status}
+                  userName={order.userId.name}
+                  phoneNumber={order.phone}
+                  date={order.date.slice(0, 10)}
+                  createdAt={order.createdDate.slice(0, 10)}
+                  time={order.time}
+                  orderNumber={order.orderNumber}
+                />
+              ))
+            ) : (
+              <p>No orders found.</p>
+            )}
           </div>
         )}
       </div>

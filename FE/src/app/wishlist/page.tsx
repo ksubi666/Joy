@@ -103,6 +103,7 @@ const Page = () => {
       wishlist &&
       wishlist.map((el) => (
         <Cart
+          isOrder={false}
           id={el.ProductId._id}
           key={el.ProductId.name}
           image={el.ProductId.image[0]}
