@@ -28,7 +28,7 @@ const InsightOrders = ({
     <div className={styles.orderContainer}>
       <div className={styles.subContainer}>#{orderNumber}</div>
       <div className="flex p-4 flex-col items-start gap-1">
-        <h3>{userName}</h3>
+        <h3 className="capitalize font-medium">{userName}</h3>
         <p>{phoneNumber}</p>
       </div>
       <div className={styles.subContainer}>{date + '-' + time}</div>
