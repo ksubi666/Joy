@@ -14,6 +14,7 @@ import { DatePickerDemo } from './DatePicker';
 import { Button } from './ui/button';
 import { TimeSelect } from './TimeSelect';
 import { axiosInstance } from '@/lib/axios';
+import { useRouter } from 'next/navigation';
 interface Product {
   ProductId: {
     categoryId: string[];
@@ -51,6 +52,7 @@ const OrderSheet = ({
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [user, setUser] = useState<DecodedToken | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const token = document.cookie;
@@ -99,6 +101,7 @@ const OrderSheet = ({
       phone: phone,
     });
     localStorage.removeItem('cartId');
+    router.push('/');
   };
   return (
     <Sheet>

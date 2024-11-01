@@ -4,6 +4,8 @@ import { axiosInstance } from '@/lib/axios';
 import _ from 'lodash';
 import { format } from 'date-fns';
 import { InsightChart } from './InsigthChart';
+import { StarRating } from './StartRating';
+import Image from 'next/image';
 
 const month = [
   'January',
@@ -25,6 +27,8 @@ interface Review {
   createdAt: string;
   content?: string;
   rating?: number;
+  review: string;
+  productId: { _id: string; image: string; name: string };
 }
 interface Order {
   status: string;
@@ -46,6 +50,7 @@ const AdminInsight = ({ orders }: { orders: Order[] }) => {
   const lastMonthName = month[d.getMonth() - 1] || month[11];
 
   const [reviews, setReviews] = useState<ReviewsGrouped>({});
+  const [review, setReview] = useState<Review[]>([]);
 
   useEffect(() => {
     const getReviews = async () => {
@@ -54,6 +59,7 @@ const AdminInsight = ({ orders }: { orders: Order[] }) => {
         return format(new Date(review.createdAt), 'MMMM');
       });
       setReviews(groupedReviews);
+      setReview(data);
     };
 
     getReviews();
@@ -98,6 +104,29 @@ const AdminInsight = ({ orders }: { orders: Order[] }) => {
         <div className="w-full rounded-lg border-[1px]">
           <InsightChart />
         </div>
+      </div>
+      <div className="flex flex-col gap-2 rounded-lg border-[1px] h-full overflow-auto">
+        {review.map((el) => (
+          <div className="p-5 flex justify-between border-b-[1px] last:border-0 items-center">
+            <div className="flex gap-5 items-center">
+              <div className="relative w-[80px] h-[80px] rounded-lg overflow-hidden">
+                <Image
+                  fill
+                  src={`https://pub-085cb38b95fb4b51936e3f399499e3cd.r2.dev/joy/${el.productId.image[0]}`}
+                  objectFit="cover"
+                  objectPosition="center"
+                  alt="img"
+                />
+              </div>
+              <div className="w-[250px] font-medium">{el.productId.name}</div>
+            </div>
+            <div className="flex justify-between w-[250px]">
+              "{el.review}"
+              <StarRating rating={Number(el.rating)} />
+            </div>
+            <p className="text-end">{el.createdAt.slice(0, 10)}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
