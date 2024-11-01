@@ -14,6 +14,8 @@ import { order } from './routes/Order';
 
 dotenv.config();
 
+Connect(process.env.MONGODB_CONNECTION_STRING);
+
 const app = express();
 
 const PORT: string | undefined = process.env.PORT;
@@ -22,7 +24,7 @@ app.use(bodyParser.json());
 app.use(
   cors({
     credentials: true,
-    origin: 'http://localhost:3000',
+    origin: process.env.CORS_ORIGIN,
   })
 );
 
@@ -37,6 +39,5 @@ app.use('/wishlist', wishlist);
 app.use('/order', order);
 
 app.listen(PORT, () => {
-  Connect(process.env.MONGODB_CONNECTION_STRING);
   console.log('listening port', PORT);
 });
