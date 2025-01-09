@@ -14,7 +14,7 @@ import { order } from './routes/Order';
 
 dotenv.config();
 
-Connect(process.env.MONGODB_CONNECTION_STRING);
+Connect(process.env.MONGO_URI);
 
 const app = express();
 
@@ -24,13 +24,12 @@ app.use(bodyParser.json());
 app.use(
   cors({
     credentials: true,
-    origin: process.env.CORS_ORIGIN,
+    origin: '*',
   })
 );
 
 app.use('/user', user);
 app.use('/category', category);
-
 app.use('/auth', auth);
 app.use('/product', product);
 app.use('/review', review);
