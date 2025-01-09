@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(
   cors({
     credentials: true,
-    origin: '*',
+    origin: 'https://joy-black.vercel.app',
   })
 );
 
