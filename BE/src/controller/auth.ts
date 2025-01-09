@@ -13,7 +13,10 @@ export const Login = async (req: Request, res: Response): Promise<any> => {
 
     bcrypt.compare(password, response.password, (_err, result) => {
       if (result) {
-        const token = jwt.sign({ ...response }, 'password123');
+        const token = jwt.sign(
+          { ...response },
+          process.env.JWT_PRIVATE_KEY as string
+        );
 
         return res.status(200).cookie('token', token).end();
       } else {
