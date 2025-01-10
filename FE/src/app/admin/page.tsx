@@ -10,13 +10,9 @@ const InsightOrders = dynamic(() => import('@/components/InsightOrders'), {
 });
 const InsightOrderTitles = dynamic(
   () => import('@/components/InsightOrderTitles'),
-  {
-    ssr: false,
-  }
+  { ssr: false }
 );
-const Map = dynamic(() => import('@/components/Map'), {
-  ssr: false,
-});
+const Map = dynamic(() => import('@/components/Map'), { ssr: false });
 const AdminSideBard = dynamic(() => import('@/components/AdminSideBard'), {
   ssr: false,
 });
@@ -66,30 +62,26 @@ const Page = () => {
   }, [menu, router]);
 
   useEffect(() => {
-    const getProducts = async () => {
-      const { data } = await axiosInstance.get<Product[]>(
-        '/product/getProducts'
-      );
-      setProducts(data);
+    const fetchData = async () => {
+      const [productsResponse, ordersResponse] = await Promise.all([
+        axiosInstance.get<Product[]>('/product/getProducts'),
+        axiosInstance.get<Order[]>('/order/getOrders'),
+      ]);
+      setProducts(productsResponse.data);
+      setOrders(ordersResponse.data);
     };
 
-    const getOrders = async () => {
-      const { data } = await axiosInstance.get<Order[]>('/order/getOrders');
-      setOrders(data);
-      console.log(data);
-    };
-
-    getOrders();
-    getProducts();
+    fetchData();
   }, []);
 
-  return (
-    <div className={styles.container}>
-      <AdminSideBard />
-      <div className={styles.subContainer}>
-        {menu === 'Insight' && <AdminInsight orders={orders} />}
-        {menu === 'Categories' && <AdminProducts products={products} />}
-        {menu === 'Locations' && (
+  const renderContent = () => {
+    switch (menu) {
+      case 'Insight':
+        return <AdminInsight orders={orders} />;
+      case 'Categories':
+        return <AdminProducts products={products} />;
+      case 'Locations':
+        return (
           <div className="p-5 h-full w-full">
             <Map
               center={[47.913938, 106.916631]}
@@ -98,13 +90,15 @@ const Page = () => {
               setLocation={null}
             />
           </div>
-        )}
-        {menu === 'Orders' && (
+        );
+      case 'Orders':
+        return (
           <div className="h-fit rounded-lg flex flex-col gap-1 overflow-y-auto">
             <InsightOrderTitles />
             {orders.length > 0 ? (
               orders.map((order) => (
                 <InsightOrders
+                  key={order.orderNumber}
                   status={order.status}
                   userName={order.userId.name}
                   phoneNumber={order.phone}
@@ -118,8 +112,16 @@ const Page = () => {
               <p>No orders found.</p>
             )}
           </div>
-        )}
-      </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className={styles.container}>
+      <AdminSideBard />
+      <div className={styles.subContainer}>{renderContent()}</div>
     </div>
   );
 };
