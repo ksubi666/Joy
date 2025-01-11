@@ -31,7 +31,7 @@ const AdminProducts: React.FC<AdminProductsProps> = ({ products }) => {
               _id={product._id}
               title={product.name}
               price={product.price}
-              imgUrl={`https://pub-085cb38b95fb4b51936e3f399499e3cd.r2.dev/joy/${product.image[0]}`}
+              imgUrl={`https://pub-085cb38b95fb4b51936e3f399499e3cd.r2.dev/${product.image[0]}.jpg`}
               rating="4"
               description={product.description}
               discount={product.discount}
