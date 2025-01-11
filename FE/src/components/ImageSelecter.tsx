@@ -70,10 +70,7 @@ const ImageSelecter: React.FC<ImageSelecterProps> = ({
 
   const previewImages =
     imageUrls.length > 0
-      ? imageUrls.map(
-          (img) =>
-            `https://pub-085cb38b95fb4b51936e3f399499e3cd.r2.dev/joy/${img}`
-        )
+      ? imageUrls.map((img) => img)
       : [
           'https://static.wixstatic.com/media/ea71bb_92c8a41554974578951b17ed811d4df6~mv2.png/v1/fill/w_2620,h_1540,q_90/ea71bb_92c8a41554974578951b17ed811d4df6~mv2.webp',
         ];

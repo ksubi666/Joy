@@ -65,12 +65,7 @@ const Cart = ({
               : 'relative w-[180px] h-[180px]'
           }
         >
-          <Image
-            src={`https://pub-085cb38b95fb4b51936e3f399499e3cd.r2.dev/joy/${image}`}
-            alt={title}
-            fill
-            objectFit="cover"
-          />
+          <Image src={image} alt={title} fill objectFit="cover" />
           <div className="w-full h-full absolute bg-custom-gradient opacity-40 z-10"></div>
           {pathname === '/wishlist' && (
             <Heart
