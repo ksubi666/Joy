@@ -79,7 +79,7 @@ const ProductsList = () => {
             title={product.name}
             price={product.price}
             product={product._id}
-            imgUrl={`https://pub-085cb38b95fb4b51936e3f399499e3cd.r2.dev/joy/${product.image[0]}`}
+            imgUrl={product.image[0]}
             rating={averageRating.toString()}
           />
         );

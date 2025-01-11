@@ -112,7 +112,7 @@ const AdminInsight = ({ orders }: { orders: Order[] }) => {
               <div className="relative w-[80px] h-[80px] rounded-lg overflow-hidden">
                 <Image
                   fill
-                  src={`https://pub-085cb38b95fb4b51936e3f399499e3cd.r2.dev/joy/${el.productId.image[0]}`}
+                  src={el.productId.image[0]}
                   objectFit="cover"
                   objectPosition="center"
                   alt="img"

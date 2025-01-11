@@ -95,12 +95,7 @@ const ProductDetail: React.FC = () => {
         >
           <div className="flex flex-col gap-4 items-center">
             <div className="relative w-[600px] h-[600px] rounded-lg overflow-hidden">
-              <Image
-                src={`https://pub-085cb38b95fb4b51936e3f399499e3cd.r2.dev/joy/${imageUrl}`}
-                fill
-                alt={product.name}
-                objectFit="cover"
-              />
+              <Image src={imageUrl} fill alt={product.name} objectFit="cover" />
             </div>
             <DetailPageCarousel
               setImageUrl={setImageUrl}

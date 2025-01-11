@@ -107,7 +107,7 @@ const Map: React.FC<MapProps> = ({
               <Popup>
                 <div className="w-[200px] flex flex-col gap-2">
                   <Image
-                    src={`https://pub-085cb38b95fb4b51936e3f399499e3cd.r2.dev/joy/${el.image[0]}`}
+                    src={el.image[0]}
                     alt="location"
                     width={200}
                     height={100}

@@ -38,7 +38,7 @@ export const DetailPageCarousel: React.FC<DetailPageCarouselProps> = ({
                     onClick={() => handlerClick(el)}
                   >
                     <Image
-                      src={`https://pub-085cb38b95fb4b51936e3f399499e3cd.r2.dev/joy/${el}`}
+                      src={el}
                       fill
                       alt={''}
                       objectFit="cover"
